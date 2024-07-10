@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +15,15 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movement;
     private Vector2 aim;
+    private bool isLeftTrigger;
+    private bool isRightTrigger;
 
     private Vector3 playerVelocity;
 
     private PlayerControls playerControls;
     private PlayerInput playerInput;
+
+    [SerializeField] GameObject swordRange;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -44,7 +49,24 @@ public class PlayerController : MonoBehaviour
     {
         movement = playerControls.Player.Move.ReadValue<Vector2>();
         aim = playerControls.Player.Aim.ReadValue<Vector2>();
+        playerControls.Player.LeftTrigger.performed += LeftTriggerPerformed;
+        playerControls.Player.LeftTrigger.canceled += LeftTriggerCanceled;
+        Debug.Log(isLeftTrigger);
+
     }
+
+    private void LeftTriggerCanceled(InputAction.CallbackContext context)
+    {
+        isLeftTrigger = false;
+        swordRange.SetActive(false);
+    }
+
+    private void LeftTriggerPerformed(InputAction.CallbackContext context)
+    {
+        isLeftTrigger = true;
+        swordRange.SetActive(true);
+    }
+
     void HandleMovement()
     {
         Vector3 move = new Vector3(movement.x, 0, movement.y);
@@ -62,5 +84,9 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, newrotation, gamepadRotateSmoothing * Time.deltaTime);
             }
         }
+    }
+    private void OnLeftTrigger()
+    {
+        Debug.Log("button");
     }
 }
