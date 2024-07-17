@@ -1,17 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [Header("Attack Settings")]
+
+    
+    [SerializeField] private float attackColdown;
+    private float attackTimer;
+    [Space]
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
 
-    private CharacterController controller;
+    public CharacterController controller;
 
     private Vector2 movement;
     private Vector2 aim;
@@ -21,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
 
     private PlayerControls playerControls;
+    
     private PlayerInput playerInput;
 
     [SerializeField] GameObject swordRange;
@@ -44,27 +54,40 @@ public class PlayerController : MonoBehaviour
         HandleInput();
         HandleMovement();
         HandleRotation();
+        Attack();
+        attackTimer += Time.deltaTime;
+    }
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        movement = context.ReadValue<Vector2>();
+    }
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        aim = context.ReadValue<Vector2>();
     }
     void HandleInput()
     {
-        movement = playerControls.Player.Move.ReadValue<Vector2>();
-        aim = playerControls.Player.Aim.ReadValue<Vector2>();
-        playerControls.Player.LeftTrigger.performed += LeftTriggerPerformed;
-        playerControls.Player.LeftTrigger.canceled += LeftTriggerCanceled;
-        Debug.Log(isLeftTrigger);
 
+   
     }
 
-    private void LeftTriggerCanceled(InputAction.CallbackContext context)
+    private void Attack()
     {
-        isLeftTrigger = false;
-        swordRange.SetActive(false);
+        if (isLeftTrigger)
+        {
+            if (attackTimer >= attackColdown)
+            {
+                StartCoroutine(attackCoroutines());
+            }
+        }
     }
-
-    private void LeftTriggerPerformed(InputAction.CallbackContext context)
+    private IEnumerator attackCoroutines()
     {
-        isLeftTrigger = true;
         swordRange.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        swordRange.SetActive(false);
+        attackTimer = 0;
+        yield return null;
     }
 
     void HandleMovement()
@@ -77,7 +100,6 @@ public class PlayerController : MonoBehaviour
         if(Mathf.Abs(aim.x) > controllerDeadZone || Mathf.Abs(aim.y) > controllerDeadZone)
         {
             Vector3 playerDirection = Vector3.right * -aim.y + Vector3.forward * aim.x;
-            Debug.Log(playerDirection);
             if(playerDirection.sqrMagnitude > 0.0f)
             {
                 Quaternion newrotation = Quaternion.LookRotation(playerDirection, Vector3.up);
@@ -85,8 +107,27 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void OnLeftTrigger()
+    public void OnLeftTrigger(InputAction.CallbackContext context)
     {
-        Debug.Log("button");
+        if (context.started)
+        {
+            isLeftTrigger = true;
+            Debug.Log(isLeftTrigger);
+        }
+        if (context.canceled)
+        {
+            isLeftTrigger = false;
+            Debug.Log(isLeftTrigger);
+        }
+
+
+    }
+    private void OnRightTrigger()
+    {
+        Debug.Log("123");
+    }
+    private void Start()
+    {
+        Debug.Log((Input.GetJoystickNames().Length));
     }
 }

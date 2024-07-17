@@ -38,14 +38,14 @@
                     "id": "c7ddba70-f567-4092-8206-5059dfdfc22a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "0fdf6aec-879c-4d3d-9425-66704bfd4d59",
+                    "id": "62ff4b20-7504-4c04-8f3e-6ecd936a6fdf",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
@@ -56,7 +56,7 @@
                 },
                 {
                     "name": "",
-                    "id": "d354a0a5-d60b-49f3-a1b8-746d674a8db6",
+                    "id": "14f0f055-afcd-4de7-b8d9-0a4348e2f9bc",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
@@ -67,7 +67,7 @@
                 },
                 {
                     "name": "",
-                    "id": "58985c83-6207-473b-a29f-ba553a4d2ed6",
+                    "id": "cb1e6e99-f632-4086-9f39-a9b3a0f2fcf8",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
@@ -78,7 +78,7 @@
                 },
                 {
                     "name": "",
-                    "id": "edc85db9-1efc-43c2-afa1-31145cfc76e9",
+                    "id": "e142e734-d5b7-4816-aec9-eceff89ee0c0",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
