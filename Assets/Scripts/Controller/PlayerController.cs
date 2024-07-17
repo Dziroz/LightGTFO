@@ -14,18 +14,25 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private float attackColdown;
     private float attackTimer;
+    [SerializeField] GameObject swordRange;
     [Space]
+    [Header("Lamp Settings")]
+    [SerializeField] public bool isLamped;
+    [SerializeField] public GameObject lampPrefab;
+    [SerializeField] GameObject lamp;
+
+
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
 
-    public CharacterController controller;
+    private CharacterController controller;
 
     private Vector2 movement;
     private Vector2 aim;
     private bool isLeftTrigger;
-    private bool isRightTrigger;
+    public bool isRightTrigger;
 
     private Vector3 playerVelocity;
 
@@ -33,7 +40,6 @@ public class PlayerController : MonoBehaviour
     
     private PlayerInput playerInput;
 
-    [SerializeField] GameObject swordRange;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -51,11 +57,9 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        HandleInput();
         HandleMovement();
         HandleRotation();
-        Attack();
-        attackTimer += Time.deltaTime;
+        Attack();      
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -65,14 +69,36 @@ public class PlayerController : MonoBehaviour
     {
         aim = context.ReadValue<Vector2>();
     }
-    void HandleInput()
+    public void OnLeftTrigger(InputAction.CallbackContext context)
     {
-
-   
+        if (context.started)
+        {
+            isLeftTrigger = true;
+            Debug.Log(isLeftTrigger);
+        }
+        if (context.canceled)
+        {
+            isLeftTrigger = false;
+            Debug.Log(isLeftTrigger);
+        }
     }
+    public void OnRightTrigger(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            isRightTrigger = true;
+            //DropLamp();
 
+
+        }
+        if (context.canceled)
+        {
+            isRightTrigger = false;
+        }
+    }
     private void Attack()
     {
+        attackTimer += Time.deltaTime;
         if (isLeftTrigger)
         {
             if (attackTimer >= attackColdown)
@@ -81,6 +107,18 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void TakeLamp()
+    {
+        lamp.SetActive(true);
+        isLamped = true;
+    }
+    private void DropLamp()
+    {
+        lamp.SetActive(false);
+        isLamped = false;
+        Instantiate(lampPrefab, new Vector3(transform.position.x,transform.position.y), Quaternion.identity);
+    }
+
     private IEnumerator attackCoroutines()
     {
         swordRange.SetActive(true);
@@ -89,7 +127,6 @@ public class PlayerController : MonoBehaviour
         attackTimer = 0;
         yield return null;
     }
-
     void HandleMovement()
     {
         Vector3 move = new Vector3(movement.x, 0, movement.y);
@@ -106,28 +143,5 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, newrotation, gamepadRotateSmoothing * Time.deltaTime);
             }
         }
-    }
-    public void OnLeftTrigger(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            isLeftTrigger = true;
-            Debug.Log(isLeftTrigger);
-        }
-        if (context.canceled)
-        {
-            isLeftTrigger = false;
-            Debug.Log(isLeftTrigger);
-        }
-
-
-    }
-    private void OnRightTrigger()
-    {
-        Debug.Log("123");
-    }
-    private void Start()
-    {
-        Debug.Log((Input.GetJoystickNames().Length));
     }
 }
