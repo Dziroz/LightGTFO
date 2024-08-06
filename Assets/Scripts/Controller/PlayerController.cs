@@ -17,10 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject swordRange;
     [Space]
     [Header("Lamp Settings")]
-    [SerializeField] public bool isLamped;
+    [SerializeField] public bool canTake;
     [SerializeField] public GameObject lampPrefab;
-    [SerializeField] GameObject lamp;
-
+    [SerializeField] public GameObject lamp;
+    [SerializeField] public GameObject lampInGame;
+    [SerializeField] private float takeRange;
+    [SerializeField] private LayerMask lampMask;
+    static public bool lampInPlayer;
 
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float gravityValue = -9.81f;
@@ -57,6 +60,8 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
+        //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
         HandleMovement();
         HandleRotation();
         Attack();      
@@ -87,8 +92,16 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             isRightTrigger = true;
-            //DropLamp();
-
+            if (lamp.activeSelf)
+            {
+                DropLamp();
+                Debug.Log(1);
+            }
+            else
+            {
+                TakeLamp();
+                Debug.Log(2);
+            }
 
         }
         if (context.canceled)
@@ -109,14 +122,22 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeLamp()
     {
-        lamp.SetActive(true);
-        isLamped = true;
+        if (canTake && lampInPlayer == false)
+        {
+            lamp.SetActive(true);
+            Destroy(lampInGame);
+            canTake = false;
+            lampInPlayer = true;
+        }
     }
     private void DropLamp()
     {
-        lamp.SetActive(false);
-        isLamped = false;
-        Instantiate(lampPrefab, new Vector3(transform.position.x,transform.position.y), Quaternion.identity);
+        if(lamp.activeSelf == true)
+        {
+            lamp.SetActive(false);
+            lampInPlayer = false;
+            Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        }       
     }
 
     private IEnumerator attackCoroutines()

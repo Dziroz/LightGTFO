@@ -21,13 +21,20 @@ public class TakeZone : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-
-        if(other.gameObject.tag == "Lamp" && playerScript.isLamped == false && playerScript.isRightTrigger == true)
+        if(other.gameObject.tag == "Lamp" && PlayerController.lampInPlayer == false)
         {
-            Debug.Log("2");
-            Destroy(other.gameObject);
-            playerScript.TakeLamp();
-            
+            playerScript.canTake = true;
+            playerScript.lampInGame = other.gameObject;
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Lamp" && PlayerController.lampInPlayer == false)
+        {
+            playerScript.canTake = false;
+            playerScript.lampInGame = null;
+
         }
     }
 

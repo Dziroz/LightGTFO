@@ -1,9 +1,18 @@
 ﻿
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAiTutorial : MonoBehaviour
 {
+    [Header("Kick Setting")]
+
+    [SerializeField] private float kickPower;
+    [SerializeField] private float kickTimer;
+
+    [Space]
+
     public NavMeshAgent agent;
 
     public Transform player;
@@ -12,40 +21,64 @@ public class EnemyAiTutorial : MonoBehaviour
 
     public float health;
 
+    public Transform lamp;
+
+    
 
 
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
+    
 
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
-
+    private Rigidbody rb;
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        FindLamp();
     }
 
     private void Update()
     {
+        if(lamp == null || lamp.gameObject.activeSelf == false)
+        {
+            Debug.Log("1");
+            lamp = FindLamp();
+        }
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        
+        if (playerInSightRange && !playerInAttackRange) ChaseLamp();
+        if (playerInAttackRange && playerInSightRange) Attack();
+
+
     }
 
-    
-
-
-    private void ChasePlayer()
+    private Transform FindLamp()
     {
-        agent.SetDestination(player.position);
+        lamp = GameObject.FindGameObjectWithTag("Lamp").transform;
+        if(lamp.parent == null && lamp.gameObject.activeSelf == true)
+        {
+            return lamp;
+        }
+        if(lamp.parent.gameObject.tag == "Player" && lamp.gameObject.activeSelf == true)
+        {
+            return lamp;
+        }
+        return null;
+    }
+    private void ChaseLamp()
+    {
+        agent.SetDestination(lamp.position);
     }
 
-    private void AttackPlayer()
+    private void Attack()
     {
         agent.SetDestination(transform.position);
 
@@ -55,11 +88,28 @@ public class EnemyAiTutorial : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Transform point)
     {
         health -= damage;
-
+        StartCoroutine(Kick(point));
         if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+    }
+    private void kick(Transform point)
+    {
+        agent.enabled = false;
+        rb.isKinematic = false;
+        rb.AddForce((transform.position - point.position) * 100);
+    }
+    private IEnumerator Kick(Transform point)
+    {
+        agent.enabled = false;
+        rb.isKinematic = false;
+        rb.AddForce((transform.position - point.position) * kickPower);
+        yield return new WaitForSeconds(kickTimer);
+        rb.velocity = Vector3.zero;
+        agent.enabled = true;
+        rb.isKinematic = true;
+        yield return null;
     }
     private void DestroyEnemy()
     {
