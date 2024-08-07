@@ -26,6 +26,10 @@ public class TakeZone : MonoBehaviour
             playerScript.canTake = true;
             playerScript.lampInGame = other.gameObject;
         }
+        if(other.gameObject.tag == "Fire")
+        {
+
+        }
 
     }
     private void OnTriggerExit(Collider other)
@@ -34,7 +38,6 @@ public class TakeZone : MonoBehaviour
         {
             playerScript.canTake = false;
             playerScript.lampInGame = null;
-
         }
     }
 

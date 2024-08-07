@@ -229,6 +229,9 @@ MonoBehaviour:
   lampMask:
     serializedVersion: 2
     m_Bits: 0
+  fireIsCanTake: 0
+  thisFireGameObject: {fileID: 0}
+  timeForTakeFire: 0
   playerSpeed: 5
   gravityValue: -9.81
   controllerDeadZone: 0.1
@@ -515,7 +518,7 @@ GameObject:
   - component: {fileID: 1521497790699062056}
   - component: {fileID: 4940344909918934565}
   m_Layer: 12
-  m_Name: Cube (1)
+  m_Name: Lamp
   m_TagString: Lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -25,6 +25,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask lampMask;
     static public bool lampInPlayer;
 
+    [Space]
+    [Header("Fire Setting")]
+    [SerializeField] public bool fireIsCanTake;
+    private float fireTimer;
+    [SerializeField] public GameObject thisFireGameObject;
+    [SerializeField] private float timeForTakeFire;
+    [Space]
+
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
@@ -138,6 +146,14 @@ public class PlayerController : MonoBehaviour
             lampInPlayer = false;
             Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         }       
+    }
+    private void takeFire()
+    {
+        fireTimer += Time.deltaTime;
+        if (fireTimer >= timeForTakeFire)
+        {
+
+        }
     }
 
     private IEnumerator attackCoroutines()
