@@ -52,8 +52,12 @@ public class FireManager : MonoBehaviour
     {
         if(timer >= TimeToLoseFire)
         {
-            firePower--;
-            ResetTime();
+            if(firePower > 0)
+            {
+                firePower--;
+                ResetTime();
+            }
+
             
             if(firePower <= 0)
             {
