@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
         Attack();
         takeFire();
         StaminaController();
+        Death();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -226,6 +227,21 @@ public class PlayerController : MonoBehaviour
         attackTimer = 0;
         yield return null;
     }
+    private void Death()
+    {
+        GameObject Lamp = GameObject.FindGameObjectWithTag("Lamp");
+        float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
+        Debug.Log(distance);
+        if(distance > Lamp.transform.GetChild(0).gameObject.GetComponent<Light>().range)
+        {
+            Debug.Log(gameObject.name + "Вне света");
+        }
+        else
+        {
+            Debug.Log(gameObject.name + "Горит");
+        }
+    }
+    
     void HandleMovement()
     {
         Vector3 move = new Vector3(movement.x, 0, movement.y);

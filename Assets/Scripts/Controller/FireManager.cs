@@ -5,6 +5,9 @@ using UnityEngine;
 public class FireManager : MonoBehaviour
 {
     [SerializeField] public int firePower;
+    [SerializeField] public int maxFirePower;
+    [SerializeField] public int[] firePowerArray;
+
     [SerializeField] public GameObject lamp;
     [SerializeField] public float TimeToLoseFire;
     [SerializeField] public GameObject lampLightPoint;
@@ -67,7 +70,7 @@ public class FireManager : MonoBehaviour
     }
     public void LightPower()
     {
-        lampLightPoint.GetComponent<Light>().intensity = firePower;
+        lampLightPoint.GetComponent<Light>().range = firePower;
     }
 
 
