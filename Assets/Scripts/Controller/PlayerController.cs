@@ -8,15 +8,19 @@ using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Stamina")]
+    [SerializeField] private float stamina;
+    [SerializeField] private float maxStamina;
+    [Space]
 
     [Header("Attack Settings")]
-
-    
     [SerializeField] private float attackColdown;
     private float attackTimer;
     [SerializeField] GameObject swordRange;
     [SerializeField] private int ax;
+
     [Space]
+
     [Header("Lamp Settings")]
     [SerializeField] public bool canTake;
     [SerializeField] public GameObject lampPrefab;
@@ -27,11 +31,13 @@ public class PlayerController : MonoBehaviour
     static public bool lampInPlayer;
 
     [Space]
+
     [Header("Fire Setting")]
     [SerializeField] public bool fireCanTake;
     [SerializeField] private float fireTimer;
     [SerializeField] public GameObject thisFireGameObject;
     [SerializeField] private float timeForTakeFire;
+
     [Space]
 
     [SerializeField] private float playerSpeed = 5f;
@@ -77,6 +83,7 @@ public class PlayerController : MonoBehaviour
         HandleRotation();
         Attack();
         takeFire();
+        StaminaController();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -188,6 +195,28 @@ public class PlayerController : MonoBehaviour
     {
         fireTimer = 0;
     }
+    private void StaminaController()
+    {
+        if (lamp.activeSelf)
+        {
+            if (stamina >=0)
+            {
+                stamina -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (stamina <= maxStamina)
+            {
+                stamina += Time.deltaTime;
+            }
+        }
+        if (stamina <= 0)
+        {
+            DropLamp();
+        }
+    }
+    
 
     private IEnumerator attackCoroutines()
     {

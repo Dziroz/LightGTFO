@@ -2194,6 +2194,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8951581063995505496, guid: 36ce1b65ebdcd944db236a004526f539, type: 3}
+      propertyPath: maxStamina
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8951581063995505496, guid: 36ce1b65ebdcd944db236a004526f539, type: 3}
       propertyPath: swordRange
       value: 
       objectReference: {fileID: 324314956}
