@@ -28,7 +28,8 @@ public class TakeZone : MonoBehaviour
         }
         if(other.gameObject.tag == "Fire")
         {
-
+            playerScript.fireCanTake = true;
+            playerScript.thisFireGameObject = other.gameObject;
         }
 
     }
@@ -38,6 +39,12 @@ public class TakeZone : MonoBehaviour
         {
             playerScript.canTake = false;
             playerScript.lampInGame = null;
+        }
+        if(other.gameObject.tag == "Fire")
+        {
+            playerScript.fireCanTake = false;
+            playerScript.thisFireGameObject = null;
+            playerScript.ResetFireTimer();
         }
     }
 

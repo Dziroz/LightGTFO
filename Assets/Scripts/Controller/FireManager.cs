@@ -8,7 +8,7 @@ public class FireManager : MonoBehaviour
     [SerializeField] public GameObject lamp;
     [SerializeField] public float TimeToLoseFire;
     [SerializeField] public GameObject lampLightPoint;
-    private float timer;
+    [SerializeField] private float timer;
     void Start()
     {
         
@@ -18,6 +18,8 @@ public class FireManager : MonoBehaviour
     {
         Find();
         LightPower();
+        Timer();
+        RemovePower();
     }
     private void Find()
     {
@@ -31,6 +33,7 @@ public class FireManager : MonoBehaviour
     public void ResetTime()
     {
         timer = 0;
+        Debug.Log(firePower);
     }
     public void AddPower()
     {
@@ -44,6 +47,19 @@ public class FireManager : MonoBehaviour
             ResetTime();
         }
 
+    }
+    public void RemovePower()
+    {
+        if(timer >= TimeToLoseFire)
+        {
+            firePower--;
+            ResetTime();
+            
+            if(firePower <= 0)
+            {
+                Debug.Log("Фонарь потушен");
+            }
+        }
     }
     public void LightPower()
     {

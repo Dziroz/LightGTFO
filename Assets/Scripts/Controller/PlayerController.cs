@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackColdown;
     private float attackTimer;
     [SerializeField] GameObject swordRange;
+    [SerializeField] private int ax;
     [Space]
     [Header("Lamp Settings")]
     [SerializeField] public bool canTake;
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
     [Space]
     [Header("Fire Setting")]
-    [SerializeField] public bool fireIsCanTake;
-    private float fireTimer;
+    [SerializeField] public bool fireCanTake;
+    [SerializeField] private float fireTimer;
     [SerializeField] public GameObject thisFireGameObject;
     [SerializeField] private float timeForTakeFire;
     [Space]
@@ -44,18 +45,20 @@ public class PlayerController : MonoBehaviour
     private Vector2 aim;
     private bool isLeftTrigger;
     public bool isRightTrigger;
-
+    private bool isPressB;
     private Vector3 playerVelocity;
 
     private PlayerControls playerControls;
     
     private PlayerInput playerInput;
 
+    private FireManager fireManager;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
+        fireManager = GameObject.Find("FireManager").GetComponent<FireManager>();
     }
 
     private void OnEnable()
@@ -72,7 +75,8 @@ public class PlayerController : MonoBehaviour
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
         HandleMovement();
         HandleRotation();
-        Attack();      
+        Attack();
+        takeFire();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -117,6 +121,18 @@ public class PlayerController : MonoBehaviour
             isRightTrigger = false;
         }
     }
+    public void OnPressB(InputAction.CallbackContext contex)
+    {
+        if (contex.started)
+        {
+            isPressB = true;
+        }
+        if (contex.canceled)
+        {
+            isPressB = false;
+        }
+    }
+    
     private void Attack()
     {
         attackTimer += Time.deltaTime;
@@ -140,6 +156,7 @@ public class PlayerController : MonoBehaviour
     }
     private void DropLamp()
     {
+
         if(lamp.activeSelf == true)
         {
             lamp.SetActive(false);
@@ -149,11 +166,27 @@ public class PlayerController : MonoBehaviour
     }
     private void takeFire()
     {
-        fireTimer += Time.deltaTime;
-        if (fireTimer >= timeForTakeFire)
+        if (isPressB && fireCanTake)
         {
+            fireTimer += Time.deltaTime;
+        }
+        else
+        {
+            ResetFireTimer();
 
         }
+        if (fireTimer >= timeForTakeFire)
+        {
+            fireManager.AddPower();
+            Destroy(thisFireGameObject);
+            fireCanTake = false;
+            fireTimer = 0;
+        }
+        
+    }
+    public void ResetFireTimer()
+    {
+        fireTimer = 0;
     }
 
     private IEnumerator attackCoroutines()
