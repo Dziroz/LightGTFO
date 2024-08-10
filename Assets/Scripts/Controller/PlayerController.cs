@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour
     {
         GameObject Lamp = GameObject.FindGameObjectWithTag("Lamp");
         float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
-        Debug.Log(distance);
         if(distance > Lamp.transform.GetChild(0).gameObject.GetComponent<Light>().range)
         {
             Debug.Log(gameObject.name + "Вне света");

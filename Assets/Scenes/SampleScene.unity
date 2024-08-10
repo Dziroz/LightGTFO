@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7449d3b931cdf4086ecd5c0f5ab367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePower: 5
+  firePower: 4
   maxFirePower: 0
   firePowerArray: 0400000006000000080000000a0000000c000000
   lamp: {fileID: 0}
