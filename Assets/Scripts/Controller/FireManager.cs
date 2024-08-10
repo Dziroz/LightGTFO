@@ -5,6 +5,9 @@ using UnityEngine;
 public class FireManager : MonoBehaviour
 {
     [SerializeField] public int firePower;
+    [SerializeField] public int maxFirePower;
+    [SerializeField] public int[] firePowerArray;
+
     [SerializeField] public GameObject lamp;
     [SerializeField] public float TimeToLoseFire;
     [SerializeField] public GameObject lampLightPoint;
@@ -37,12 +40,12 @@ public class FireManager : MonoBehaviour
     }
     public void AddPower()
     {
-        if (firePower < 5)
+        if (firePower < 4)
         {
             firePower++;
             ResetTime();
         }
-        if(firePower == 5)
+        if(firePower == 4)
         {
             ResetTime();
         }
@@ -52,14 +55,14 @@ public class FireManager : MonoBehaviour
     {
         if(timer >= TimeToLoseFire)
         {
-            if(firePower > 0)
+            if(firePower >=0)
             {
                 firePower--;
                 ResetTime();
             }
 
             
-            if(firePower <= 0)
+            if(firePower == -1)
             {
                 Debug.Log("Фонарь потушен");
             }
@@ -67,7 +70,15 @@ public class FireManager : MonoBehaviour
     }
     public void LightPower()
     {
-        lampLightPoint.GetComponent<Light>().intensity = firePower;
+        if(firePower <=-1)
+        {
+            lampLightPoint.GetComponent<Light>().range = 0;
+        }
+        else
+        {
+            lampLightPoint.GetComponent<Light>().range = firePowerArray[firePower];
+        }
+        
     }
 
 

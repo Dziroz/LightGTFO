@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
+    [SerializeField] private bool PlayerTaking; // Игрок подбирает предмет
 
     private CharacterController controller;
 
@@ -79,11 +80,15 @@ public class PlayerController : MonoBehaviour
     {
         //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
-        HandleMovement();
-        HandleRotation();
-        Attack();
+        if(PlayerTaking == false)
+        {
+            HandleMovement();
+            HandleRotation();
+            Attack();
+        }     
         takeFire();
         StaminaController();
+        Death();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -175,10 +180,12 @@ public class PlayerController : MonoBehaviour
     {
         if (isPressB && fireCanTake)
         {
+            PlayerTaking = true;
             fireTimer += Time.deltaTime;
         }
         else
         {
+            PlayerTaking = false;
             ResetFireTimer();
 
         }
@@ -226,6 +233,20 @@ public class PlayerController : MonoBehaviour
         attackTimer = 0;
         yield return null;
     }
+    private void Death()
+    {
+        GameObject Lamp = GameObject.FindGameObjectWithTag("Lamp");
+        float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
+        if(distance > Lamp.transform.GetChild(0).gameObject.GetComponent<Light>().range)
+        {
+            Debug.Log(gameObject.name + "Вне света");
+        }
+        else
+        {
+            Debug.Log(gameObject.name + "Горит");
+        }
+    }
+    
     void HandleMovement()
     {
         Vector3 move = new Vector3(movement.x, 0, movement.y);

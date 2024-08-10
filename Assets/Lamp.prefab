@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 405818824075064912}
   - component: {fileID: 3051788966840129892}
   m_Layer: 12
-  m_Name: Cube
+  m_Name: Lamp
   m_TagString: Lamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
