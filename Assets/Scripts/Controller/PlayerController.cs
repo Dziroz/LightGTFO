@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
+    [SerializeField] private bool PlayerTaking; // Игрок подбирает предмет
 
     private CharacterController controller;
 
@@ -79,9 +80,12 @@ public class PlayerController : MonoBehaviour
     {
         //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
-        HandleMovement();
-        HandleRotation();
-        Attack();
+        if(PlayerTaking == false)
+        {
+            HandleMovement();
+            HandleRotation();
+            Attack();
+        }     
         takeFire();
         StaminaController();
         Death();
@@ -176,10 +180,12 @@ public class PlayerController : MonoBehaviour
     {
         if (isPressB && fireCanTake)
         {
+            PlayerTaking = true;
             fireTimer += Time.deltaTime;
         }
         else
         {
+            PlayerTaking = false;
             ResetFireTimer();
 
         }
