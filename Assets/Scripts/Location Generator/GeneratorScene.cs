@@ -23,30 +23,35 @@ public class GeneratorScene : MonoBehaviour
     {
         surfaces = GetComponent<NavMeshSurface>();
         Generate();
+        BuildNavMeshScene();
     }
     private void Generate()
     {
         int countInScene = 1;
         int missionInScene =0;
         int currentPosition = 1;
-        Instantiate(sceneStartPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject x = Instantiate(sceneStartPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        x.transform.parent = this.transform;
         for (int i = 1; i <= count; i++)
         {
             int random = Random.Range(0, sceneSimplePrefabs.Length);
             if(currentPosition == MissionPosition[missionInScene])
             {
-                Instantiate(sceneMissionPrefabs[missionInScene], new Vector3(0, 0, i * rangeBetwenPrefabs), Quaternion.identity);
+                x = Instantiate(sceneMissionPrefabs[missionInScene], new Vector3(0, 0, i * rangeBetwenPrefabs), Quaternion.identity);
+                x.transform.parent = this.transform;
                 missionInScene++;
                 currentPosition = i;
                 countInScene++;
                 continue;
             }
-            Instantiate(sceneSimplePrefabs[random], new Vector3(0,0, i * rangeBetwenPrefabs), Quaternion.identity);
+            x = Instantiate(sceneSimplePrefabs[random], new Vector3(0,0, i * rangeBetwenPrefabs), Quaternion.identity);
+            x.transform.parent = this.transform;
             countInScene++;
             currentPosition = i;
 
         }
-        Instantiate(sceneEndPrefab, new Vector3(0, 0, (currentPosition+1)*rangeBetwenPrefabs), Quaternion.identity);
+        x = Instantiate(sceneEndPrefab, new Vector3(0, 0, (currentPosition+1)*rangeBetwenPrefabs), Quaternion.identity);
+        x.transform.parent = this.transform;
 
     }
 
