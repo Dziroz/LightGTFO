@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private FireManager fireManager;
     [SerializeField]private Collider col;
+    [SerializeField]private Animator anim;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -91,11 +92,11 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         fireManager = GameObject.Find("FireManager").GetComponent<FireManager>();
         SetColor();
+       
 
     }
     private void Start()
     {
-        SetColor();
     }
 
     private void OnEnable()
@@ -352,6 +353,14 @@ public class PlayerController : MonoBehaviour
     void HandleMovement()
     {
         Vector3 move = new Vector3(movement.x, 0, movement.y);
+        if (move != Vector3.zero)
+        {
+            anim.SetBool("isWalk", true);
+        }
+        else
+        {
+            anim.SetBool("isWalk", false);
+        }
         controller.Move(move * Time.deltaTime * playerSpeed);
     }
     void HandleRotation()
