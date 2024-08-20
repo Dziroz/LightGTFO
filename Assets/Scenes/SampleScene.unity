@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5597631478999941304, guid: e23e053214e630c4e8b3ad470eb24ff3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1977,7 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePrefab: {fileID: 344886211}
-  timerToSpawnFire: 10
+  timerToSpawnFire: 1
   spawningDistance: 5
   firePower: 4
   maxFirePower: 0
@@ -2015,7 +2019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2792192099997527015, guid: 4c30595e074acab4f91f5eb328adc51b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3899265555706292956, guid: 4c30595e074acab4f91f5eb328adc51b, type: 3}
       propertyPath: m_LocalPosition.x
