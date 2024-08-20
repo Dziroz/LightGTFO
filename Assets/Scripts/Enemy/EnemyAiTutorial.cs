@@ -47,8 +47,8 @@ public class EnemyAiTutorial : MonoBehaviour
     
 
     //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange, fireInSightRange;
+    public float sightRange, attackRange, fireAttackRange;
+    public bool playerInSightRange, playerInAttackRange, fireInSightRange, fireInAttackRange;
     private Rigidbody rb;
     private void Awake()
     {
@@ -56,10 +56,7 @@ public class EnemyAiTutorial : MonoBehaviour
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         FindLamp();
-        if (isSnake)
-        {
-            FindFire();
-        }
+
     }
 
     private void Update()
@@ -72,6 +69,8 @@ public class EnemyAiTutorial : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         fireInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsFire);
+        fireInAttackRange =Physics.CheckSphere(transform.position, fireAttackRange, whatIsFire);
+
 
         if (isAttacked)
         {
@@ -88,18 +87,27 @@ public class EnemyAiTutorial : MonoBehaviour
         {
             if (isSnake)
             {
-                ChaseFire();
+                fireInScene = GameObject.FindGameObjectWithTag("Fire");
+                if(fireInSightRange && !fireInAttackRange)
+                {
+                    ChaseFire();
+                    anim.SetBool("Eat", false);
+
+                }
+                if(fireInSightRange && fireInAttackRange)
+                {
+                    fireEat();
+                    anim.SetBool("Eat",true);
+                }
             }
-            if (playerInSightRange && !playerInAttackRange) ChaseLamp();
-            if (playerInAttackRange && playerInSightRange) Attack();
+            else
+            {
+                if (playerInSightRange && !playerInAttackRange) ChaseLamp();
+                if (playerInAttackRange && playerInSightRange) Attack();
+            }
         }
 
 
-    }
-    private GameObject FindFire()
-    {
-
-        return GameObject.Find("Fire");
     }
     private Transform FindLamp()
     {
@@ -128,6 +136,10 @@ public class EnemyAiTutorial : MonoBehaviour
     }
 
     private void Attack()
+    {
+        agent.SetDestination(transform.position);
+    }
+    private void fireEat()
     {
         agent.SetDestination(transform.position);
     }
