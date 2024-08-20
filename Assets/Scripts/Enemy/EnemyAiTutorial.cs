@@ -10,18 +10,26 @@ public class EnemyAiTutorial : MonoBehaviour
 
     [SerializeField] private float kickPower;
     [SerializeField] private float kickTimer;
+    [SerializeField] private bool isAttacked;
 
     [Space]
+
+    [SerializeField] private float chasePlayerTimer;
+    private float chaseTimer;
 
     public NavMeshAgent agent;
 
     public Transform player;
+
+    public GameObject playerObject;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float health;
 
     public Transform lamp;
+
+    public GameObject col;
 
     
 
@@ -53,9 +61,23 @@ public class EnemyAiTutorial : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        
-        if (playerInSightRange && !playerInAttackRange) ChaseLamp();
-        if (playerInAttackRange && playerInSightRange) Attack();
+
+        if (isAttacked)
+        {
+
+            if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+            if (playerInAttackRange && playerInSightRange) Attack();
+            chaseTimer += Time.deltaTime;
+            if(chaseTimer >= chasePlayerTimer)
+            {
+                isAttacked = false;
+            }
+        }
+        else
+        {
+            if (playerInSightRange && !playerInAttackRange) ChaseLamp();
+            if (playerInAttackRange && playerInSightRange) Attack();
+        }
 
 
     }
@@ -77,10 +99,16 @@ public class EnemyAiTutorial : MonoBehaviour
     {
         agent.SetDestination(lamp.position);
     }
+    private void ChasePlayer()
+    {
+        agent.SetDestination(playerObject.transform.position);
+    }
 
     private void Attack()
     {
         agent.SetDestination(transform.position);
+
+        
 
     }
     private void ResetAttack()
@@ -88,8 +116,11 @@ public class EnemyAiTutorial : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage, Transform point)
+    public void TakeDamage(int damage, Transform point, GameObject player)
     {
+        playerObject = player;
+        isAttacked = true;
+        chaseTimer = 0;
         health -= damage;
         StartCoroutine(Kick(point));
         if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);

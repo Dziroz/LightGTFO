@@ -11,6 +11,19 @@ public class PlayerController : MonoBehaviour
     [Header("Stamina")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina;
+    [SerializeField] private float startSlow;
+    [SerializeField] private float lowSpeed;
+    [SerializeField] private float maxSpeed;
+    [Space]
+
+    [Header("Hp")]
+    [SerializeField] public int maxHp;
+    [SerializeField] public int hp;
+    [SerializeField] public bool alive;
+    [SerializeField] public float immortalTime;
+    [SerializeField]private bool isImmortal;
+    private float respawnTimer;
+
     [Space]
 
     [Header("Attack Settings")]
@@ -54,18 +67,28 @@ public class PlayerController : MonoBehaviour
     public bool isRightTrigger;
     private bool isPressB;
     private Vector3 playerVelocity;
+    [SerializeField]private GameObject circle;
+    [SerializeField] private GameObject color;
+    [SerializeField]
+
 
     private PlayerControls playerControls;
     
     private PlayerInput playerInput;
 
     private FireManager fireManager;
+    [SerializeField]private Collider col;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
         fireManager = GameObject.Find("FireManager").GetComponent<FireManager>();
+        
+    }
+    private void Start()
+    {
+        SetColor();
     }
 
     private void OnEnable()
@@ -80,15 +103,28 @@ public class PlayerController : MonoBehaviour
     {
         //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
-        if(PlayerTaking == false)
+        if (alive)
         {
-            HandleMovement();
-            HandleRotation();
-            Attack();
-        }     
-        takeFire();
-        StaminaController();
-        Death();
+            if (PlayerTaking == false)
+            {
+                HandleMovement();
+                HandleRotation();
+                Attack();
+            }
+            takeFire();
+            StaminaController();
+            DeathOutLight();
+
+        }
+        else
+        {
+            respawnTimer += Time.deltaTime;
+            if(respawnTimer >= 10)
+            {
+                Rebirth();
+                respawnTimer = 0;
+            }
+        }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -118,8 +154,8 @@ public class PlayerController : MonoBehaviour
             isRightTrigger = true;
             if (lamp.activeSelf)
             {
-                DropLamp();
                 Debug.Log(1);
+                DropLamp();
             }
             else
             {
@@ -168,7 +204,7 @@ public class PlayerController : MonoBehaviour
     }
     private void DropLamp()
     {
-
+        Debug.Log("Бросил");
         if(lamp.activeSelf == true)
         {
             lamp.SetActive(false);
@@ -210,6 +246,13 @@ public class PlayerController : MonoBehaviour
             {
                 stamina -= Time.deltaTime;
             }
+            if (stamina < startSlow && stamina >=0)
+            {
+                if (playerSpeed > lowSpeed)
+                {
+                    playerSpeed -= Time.deltaTime;
+                }
+            }
         }
         else
         {
@@ -217,13 +260,23 @@ public class PlayerController : MonoBehaviour
             {
                 stamina += Time.deltaTime;
             }
+            if(playerSpeed <= maxSpeed)
+            {
+                playerSpeed += Time.deltaTime;
+            }
+           
         }
         if (stamina <= 0)
         {
+            circle.SetActive(true);
             DropLamp();
         }
+        if(stamina >= maxStamina)
+        {
+            circle.SetActive(false);
+        }
     }
-    
+     
 
     private IEnumerator attackCoroutines()
     {
@@ -233,7 +286,7 @@ public class PlayerController : MonoBehaviour
         attackTimer = 0;
         yield return null;
     }
-    private void Death()
+    private void DeathOutLight()
     {
         GameObject Lamp = GameObject.FindGameObjectWithTag("Lamp");
         float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
@@ -244,6 +297,48 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log(gameObject.name + "Горит");
+        }
+    }
+    public void Death()
+    {
+        alive = false;
+    }
+    public void Rebirth()
+    {
+        transform.position = fireManager.lamp.transform.position;
+        alive = true;
+    }
+    public void TakeDamage()
+    {
+        if (isImmortal)
+        {
+
+        }
+        else
+        {
+            StartCoroutine(Immortal());
+            hp--;
+            if(lamp.activeSelf == true)
+            {
+                fireManager.AttackLight();
+            }
+        }
+    }
+    private IEnumerator Immortal()
+    {
+        isImmortal = true;
+
+        yield return new WaitForSeconds(immortalTime);
+
+        isImmortal = false;
+
+        yield return null;
+    }
+    public void TakeHeal()
+    {
+        if (hp < maxHp)
+        {
+            hp++;
         }
     }
     
@@ -263,5 +358,19 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, newrotation, gamepadRotateSmoothing * Time.deltaTime);
             }
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            TakeDamage();
+        }
+
+    }
+    void SetColor()
+    {
+        
+        var Renderer = color.GetComponent<Renderer>();
+        Renderer.material.SetColor("_Color", new Color(UnityEngine.Random.Range(0,1), UnityEngine.Random.Range(0, 1), UnityEngine.Random.Range(0, 1), 1f));
     }
 }

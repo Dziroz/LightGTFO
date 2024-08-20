@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private GameObject[] Players;
     [SerializeField] private float[] Zposition;
     [SerializeField] private float cameraZposition;
+    [SerializeField] FireManager fireManagerScript;
     
     void Start()
     {
@@ -25,13 +26,21 @@ public class CameraMovement : MonoBehaviour
         cameraZposition = ((Zposition.Max() - Zposition.Min())/2) + Zposition.Min();
         cameraObject.transform.position = new Vector3(0, cameraObject.transform.position.y, cameraZposition);
     }
+
     void SetZ()
     {
         Zposition = new float[Players.Length];
 
         for (int i = 0; i < Players.Length; i++)
         {
-            Zposition[i] = Players[i].transform.position.z;
+            if (Players[i].GetComponent<PlayerController>().alive)
+            {
+                Zposition[i] = Players[i].transform.position.z;
+            }
+            else
+            {
+                Zposition[i] = fireManagerScript.lamp.transform.position.z;
+            }
         }
     }
 }

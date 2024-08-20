@@ -40,25 +40,29 @@ public class EnemySpawn : MonoBehaviour
     {
         if (EnemyCount == Snake)
         {
-            Instantiate(enemyPrefab[1], (Position()), Quaternion.identity);
+            var x = Instantiate(enemyPrefab[1], (Position()), Quaternion.identity);
+            x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
             EnemyOnScene++;              
         }
         else
         {
-            Instantiate(enemyPrefab[0], (Position()), Quaternion.identity);
+            var x = Instantiate(enemyPrefab[0], (Position()), Quaternion.identity);
+            x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
             EnemyOnScene++;
         }
         if (EnemyCount == Tank)
         {
-            Instantiate(enemyPrefab[2], (Position()), Quaternion.identity);
+            var x =Instantiate(enemyPrefab[2], (Position()), Quaternion.identity);
+            x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
             EnemyOnScene++;
         }
         else
         {
-            Instantiate(enemyPrefab[0], (Position()), Quaternion.identity);
+            var x = Instantiate(enemyPrefab[0], (Position()), Quaternion.identity);
+            x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
             EnemyOnScene++;
         }

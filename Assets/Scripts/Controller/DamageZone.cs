@@ -20,11 +20,10 @@ public class DamageZone : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
-        if (other.tag == "Enemy")
+        if (other.gameObject.GetComponent<EnemyAiTutorial>())
         {
-            other.gameObject.GetComponent<EnemyAiTutorial>().TakeDamage(0, player.transform);
-            Debug.Log(other);
+            other.gameObject.GetComponent<EnemyAiTutorial>().TakeDamage(1, player.transform, player);
+            Debug.Log("Попал");
         }
     }
 }

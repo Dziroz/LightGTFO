@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FireManager : MonoBehaviour
 {
+    [SerializeField] private GameObject firePrefab;
+    [SerializeField] float timerToSpawnFire;
+    [SerializeField] int spawningDistance;
+    private float timerSpawn;
     [SerializeField] public int firePower;
     [SerializeField] public int maxFirePower;
     [SerializeField] public int[] firePowerArray;
@@ -16,9 +20,23 @@ public class FireManager : MonoBehaviour
     {
         
     }
-
+    void SpawnFire()
+    {
+        timerSpawn += Time.deltaTime;
+        if (timerSpawn >= timerToSpawnFire)
+        {
+            Vector3 startPosition = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+            float x = Random.Range(-1.0f, 1.0f);
+            float z = Random.Range(-1.0f, 1.0f);
+            Vector3 v = new Vector3(x, 0.0f, z).normalized;
+            Vector3 pos = startPosition + v * spawningDistance;
+            Instantiate(firePrefab, pos, Quaternion.identity);
+            timerSpawn = 0;
+        }
+    }
     private void Update()
     {
+        SpawnFire();
         Find();
         LightPower();
         Timer();
@@ -36,7 +54,7 @@ public class FireManager : MonoBehaviour
     public void ResetTime()
     {
         timer = 0;
-        Debug.Log(firePower);
+        //Debug.Log(firePower);
     }
     public void AddPower()
     {
@@ -66,6 +84,14 @@ public class FireManager : MonoBehaviour
             {
                 Debug.Log("Фонарь потушен");
             }
+        }
+    }
+    public void AttackLight()
+    {
+        if (firePower >= 0)
+        {
+            firePower--;
+            ResetTime();
         }
     }
     public void LightPower()
