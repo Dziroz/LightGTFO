@@ -25,7 +25,7 @@ public class FireManager : MonoBehaviour
         timerSpawn += Time.deltaTime;
         if (timerSpawn >= timerToSpawnFire)
         {
-            Vector3 startPosition = new Vector3(Camera.main.transform.position.x, 0, Camera.main.transform.position.z);
+            Vector3 startPosition = new Vector3(Camera.main.transform.position.x, 1, Camera.main.transform.position.z);
             float x = Random.Range(-1.0f, 1.0f);
             float z = Random.Range(-1.0f, 1.0f);
             Vector3 v = new Vector3(x, 0.0f, z).normalized;
@@ -80,7 +80,7 @@ public class FireManager : MonoBehaviour
             }
 
             
-            if(firePower == -1)
+            if(firePower <=0)
             {
                 Debug.Log("Фонарь потушен");
             }

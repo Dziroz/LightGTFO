@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
 {
+
     [Header("Stamina")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina;
@@ -53,6 +54,11 @@ public class PlayerController : MonoBehaviour
 
     [Space]
 
+    [Header("Color")]
+
+    public Color[] colors;
+    public static int colorsNumber;
+    [Space]
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
@@ -84,7 +90,8 @@ public class PlayerController : MonoBehaviour
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
         fireManager = GameObject.Find("FireManager").GetComponent<FireManager>();
-        
+        SetColor();
+
     }
     private void Start()
     {
@@ -371,6 +378,12 @@ public class PlayerController : MonoBehaviour
     {
         
         var Renderer = color.GetComponent<Renderer>();
-        Renderer.material.SetColor("_Color", new Color(UnityEngine.Random.Range(0,1), UnityEngine.Random.Range(0, 1), UnityEngine.Random.Range(0, 1), 1f));
+        Renderer.material.color = colors[colorsNumber];
+        Renderer.material.SetColor("_EmissionColor", colors[colorsNumber]);
+        colorsNumber++;
+        if(colorsNumber> colors.Length)
+        {
+            colorsNumber = 0;
+        }
     }
 }
