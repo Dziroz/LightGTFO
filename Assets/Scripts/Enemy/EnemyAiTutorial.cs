@@ -17,6 +17,7 @@ public class EnemyAiTutorial : MonoBehaviour
     [Header("Snake")]
     [SerializeField] private bool isSnake;
     [SerializeField] private GameObject fireInScene;
+    [SerializeField] private GameObject foodBone;
     [Space]
 
     [SerializeField] private float chasePlayerTimer;
@@ -97,6 +98,8 @@ public class EnemyAiTutorial : MonoBehaviour
                 if(fireInSightRange && fireInAttackRange)
                 {
                     fireEat();
+                    //fireInScene.transform.SetParent(foodBone.transform);
+                    //fireInScene.transform.position = new Vector3(0, 0, 0);
                     anim.SetBool("Eat",true);
                 }
             }

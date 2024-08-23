@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private GameObject[] Players;
     [SerializeField] private float[] Zposition;
     [SerializeField] private float cameraZposition;
+    [SerializeField] private float distance;
     [SerializeField] FireManager fireManagerScript;
     
     void Start()
@@ -24,7 +25,7 @@ public class CameraMovement : MonoBehaviour
     void FindZPosition()
     {
         cameraZposition = ((Zposition.Max() - Zposition.Min())/2) + Zposition.Min();
-        cameraObject.transform.position = new Vector3(0, cameraObject.transform.position.y, cameraZposition);
+        cameraObject.transform.position = new Vector3(0, cameraObject.transform.position.y, cameraZposition-distance);
     }
 
     void SetZ()
