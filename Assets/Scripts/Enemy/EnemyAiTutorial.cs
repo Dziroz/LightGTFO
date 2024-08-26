@@ -18,6 +18,8 @@ public class EnemyAiTutorial : MonoBehaviour
     [SerializeField] private bool isSnake;
     [SerializeField] private GameObject fireInScene;
     [SerializeField] private GameObject foodBone;
+    [SerializeField] private float timeToEat;
+    private float eatTimer;
     [Space]
 
     [SerializeField] private float chasePlayerTimer;
@@ -79,6 +81,7 @@ public class EnemyAiTutorial : MonoBehaviour
             if (playerInSightRange && !playerInAttackRange) ChasePlayer();
             if (playerInAttackRange && playerInSightRange) Attack();
             chaseTimer += Time.deltaTime;
+            eatTimer = 0;
             if(chaseTimer >= chasePlayerTimer)
             {
                 isAttacked = false;
@@ -88,18 +91,31 @@ public class EnemyAiTutorial : MonoBehaviour
         {
             if (isSnake)
             {
+                Debug.Log(fireInSightRange);
+                Debug.Log(fireInAttackRange);
                 fireInScene = GameObject.FindGameObjectWithTag("Fire");
+                if(fireInScene == null)
+                {
+                    ChaseLamp();
+                }
                 if(fireInSightRange && !fireInAttackRange)
                 {
+                    Debug.Log("я работаю");
                     ChaseFire();
                     anim.SetBool("Eat", false);
 
                 }
                 if(fireInSightRange && fireInAttackRange)
                 {
-                    fireEat();
+                    fireEating();
                     //fireInScene.transform.SetParent(foodBone.transform);
                     //fireInScene.transform.position = new Vector3(0, 0, 0);
+                    eatTimer += Time.deltaTime;
+                    if (eatTimer >= timeToEat)
+                    {
+                        Destroy(fireInScene);
+                        eatTimer = 0;
+                    }
                     anim.SetBool("Eat",true);
                 }
             }
@@ -142,7 +158,7 @@ public class EnemyAiTutorial : MonoBehaviour
     {
         agent.SetDestination(transform.position);
     }
-    private void fireEat()
+    private void fireEating()
     {
         agent.SetDestination(transform.position);
     }

@@ -300,11 +300,11 @@ public class PlayerController : MonoBehaviour
         float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
         if(distance > Lamp.transform.GetChild(0).gameObject.GetComponent<Light>().range)
         {
-            Debug.Log(gameObject.name + "Вне света");
+            //Debug.Log(gameObject.name + "Вне света");
         }
         else
         {
-            Debug.Log(gameObject.name + "Горит");
+           // Debug.Log(gameObject.name + "Горит");
         }
     }
     public void Death()
