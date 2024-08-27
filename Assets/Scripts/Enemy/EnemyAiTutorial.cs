@@ -54,9 +54,9 @@ public class EnemyAiTutorial : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange, fireInSightRange, fireInAttackRange;
     private Rigidbody rb;
     private void Awake()
-    {
+   {
         rb = GetComponent<Rigidbody>();
-        player = GameObject.Find("Player").transform;
+        //player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         FindLamp();
 

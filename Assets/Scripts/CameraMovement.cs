@@ -20,10 +20,14 @@ public class CameraMovement : MonoBehaviour
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
         SetZ();
-        FindZPosition();
+        if(Players.Length != 0)
+        {
+            FindZPosition();
+        }
     }
     void FindZPosition()
     {
+        
         cameraZposition = ((Zposition.Max() - Zposition.Min())/2) + Zposition.Min();
         cameraObject.transform.position = new Vector3(0, cameraObject.transform.position.y, cameraZposition-distance);
     }

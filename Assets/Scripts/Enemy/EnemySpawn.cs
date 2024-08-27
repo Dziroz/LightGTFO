@@ -6,7 +6,7 @@ public class EnemySpawn : MonoBehaviour
 {
 
     [SerializeField] private int maxEnemyOnScene;
-    private int EnemyOnScene;
+    [SerializeField]private int EnemyOnScene;
     [SerializeField] GameObject[] enemyPrefab;
     [SerializeField]  int EnemyCount;
 
@@ -23,10 +23,11 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
+        EnemyOnScene = GameObject.FindGameObjectsWithTag("Enemy").Length;
         timer += Time.deltaTime;
         if(timer >= SpawnColdown)
         {
-            if(GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemyOnScene)
+            if(EnemyOnScene < maxEnemyOnScene)
             {
                 Spawn();
                 timer = 0;
@@ -40,33 +41,23 @@ public class EnemySpawn : MonoBehaviour
     {
         if (EnemyCount == Snake)
         {
-            var x = Instantiate(enemyPrefab[1], (Position()), Quaternion.identity);
+            var x = Instantiate(enemyPrefab[1], Position(), Quaternion.identity);
             x.GetComponent<EnemyAiTutorial>().enabled = true;
-            EnemyCount++;
-            EnemyOnScene++;              
-        }
-        else
-        {
-            var x = Instantiate(enemyPrefab[0], (Position()), Quaternion.identity);
-            x.GetComponent<EnemyAiTutorial>().enabled = true;
-            EnemyCount++;
-            EnemyOnScene++;
+            EnemyCount++;          
         }
         if (EnemyCount == Tank)
         {
-            var x =Instantiate(enemyPrefab[2], (Position()), Quaternion.identity);
+            var x = Instantiate(enemyPrefab[2], Position(), Quaternion.identity);
             x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
-            EnemyOnScene++;
         }
         else
         {
-            var x = Instantiate(enemyPrefab[0], (Position()), Quaternion.identity);
+            var x = Instantiate(enemyPrefab[0], Position(), Quaternion.identity);
             x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
-            EnemyOnScene++;
         }
-        if(EnemyCount >= 31)
+        if(EnemyCount == Tank)
         {
             EnemyCount = 0;
         }
