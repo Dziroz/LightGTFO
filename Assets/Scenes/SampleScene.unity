@@ -723,7 +723,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 140813584188177057, guid: e23e053214e630c4e8b3ad470eb24ff3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 140813584188177057, guid: e23e053214e630c4e8b3ad470eb24ff3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -731,7 +731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 140813584188177057, guid: e23e053214e630c4e8b3ad470eb24ff3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.06
+      value: -7.6
       objectReference: {fileID: 0}
     - target: {fileID: 140813584188177057, guid: e23e053214e630c4e8b3ad470eb24ff3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -775,7 +775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5597631478999941304, guid: e23e053214e630c4e8b3ad470eb24ff3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1090,11 +1090,11 @@ MonoBehaviour:
   sceneMissionPrefabs:
   - {fileID: 5467087485716485277, guid: fd86a0d2d7a34e648a1827fd006c8e81, type: 3}
   - {fileID: 2206988228606866803, guid: e96ae5550a5579549b2d79f90faaef05, type: 3}
-  sceneStartPrefab: {fileID: 1571921564788602379, guid: 1e904fc402dd5d1489c8f1e93ab9442f, type: 3}
+  sceneStartPrefab: {fileID: 2190024528589502138, guid: bc9f82fed1380304c96aeb8ebe31088d, type: 3}
   sceneEndPrefab: {fileID: 370232314236209803, guid: 7bbdd4208fcbbd2499f28c5185cfd9d6, type: 3}
   count: 4
   MissionPosition: 0100000003000000
-  rangeBetwenPrefabs: 25
+  rangeBetwenPrefabs: 40
   surfaces: {fileID: 0}
 --- !u!4 &579393764
 Transform:
@@ -1471,13 +1471,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3608172, y: -0, z: -0, w: 0.93263656}
-  m_LocalPosition: {x: 0, y: 19.9, z: -34.9}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 17.6, z: -34.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 42.301, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1 &1251972211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,7 +1603,7 @@ MonoBehaviour:
   - {fileID: 4406981965987184283, guid: e626b6bb33a2be145bec684c3a3e9cb2, type: 3}
   EnemyCount: 0
   SpawnColdown: 1
-  spawningDistance: 10
+  spawningDistance: 50
   Snake: 5
   Tank: 10
 --- !u!1 &1288393801

@@ -27,27 +27,28 @@ public class GeneratorScene : MonoBehaviour
     }
     private void Generate()
     {
-        int countInScene = 1;
+        //int countInScene = 1;
         int missionInScene =0;
         int currentPosition = 1;
         GameObject x = Instantiate(sceneStartPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         x.transform.parent = this.transform;
-        for (int i = 1; i <= count; i++)
+        for (int i = 1; currentPosition < count; i++)
         {
-            int random = Random.Range(0, sceneSimplePrefabs.Length);
-            if(currentPosition == MissionPosition[missionInScene])
-            {
-                x = Instantiate(sceneMissionPrefabs[missionInScene], new Vector3(0, 0, i * rangeBetwenPrefabs), Quaternion.identity);
-                x.transform.parent = this.transform;
-                missionInScene++;
-                currentPosition = i;
-                countInScene++;
-                continue;
-            }
-            x = Instantiate(sceneSimplePrefabs[random], new Vector3(0,0, i * rangeBetwenPrefabs), Quaternion.identity);
-            x.transform.parent = this.transform;
-            countInScene++;
             currentPosition = i;
+            int random = Random.Range(0, sceneSimplePrefabs.Length);
+           if (missionInScene < MissionPosition.Length)
+            {
+                if (currentPosition == MissionPosition[missionInScene])
+                {
+                    x = Instantiate(sceneMissionPrefabs[missionInScene], new Vector3(0, 0, currentPosition * rangeBetwenPrefabs), Quaternion.identity);
+                    x.transform.parent = this.transform;
+                    missionInScene++;
+                    continue;
+                }
+           }
+            x = Instantiate(sceneSimplePrefabs[random], new Vector3(0,0, currentPosition * rangeBetwenPrefabs), Quaternion.identity);
+            x.transform.parent = this.transform;
+            Debug.Log(i);
 
         }
         x = Instantiate(sceneEndPrefab, new Vector3(0, 0, (currentPosition+1)*rangeBetwenPrefabs), Quaternion.identity);
