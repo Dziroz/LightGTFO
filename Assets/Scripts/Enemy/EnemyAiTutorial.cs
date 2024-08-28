@@ -91,8 +91,8 @@ public class EnemyAiTutorial : MonoBehaviour
         {
             if (isSnake)
             {
-                Debug.Log(fireInSightRange);
-                Debug.Log(fireInAttackRange);
+                //Debug.Log(fireInSightRange);
+                //Debug.Log(fireInAttackRange);
                 fireInScene = GameObject.FindGameObjectWithTag("Fire");
                 if(fireInScene == null)
                 {
@@ -100,7 +100,7 @@ public class EnemyAiTutorial : MonoBehaviour
                 }
                 if(fireInSightRange && !fireInAttackRange)
                 {
-                    Debug.Log("я работаю");
+                    //Debug.Log("я работаю");
                     ChaseFire();
                     anim.SetBool("Eat", false);
 

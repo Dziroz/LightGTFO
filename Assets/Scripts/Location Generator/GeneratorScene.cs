@@ -48,7 +48,7 @@ public class GeneratorScene : MonoBehaviour
            }
             x = Instantiate(sceneSimplePrefabs[random], new Vector3(0,0, currentPosition * rangeBetwenPrefabs), Quaternion.identity);
             x.transform.parent = this.transform;
-            Debug.Log(i);
+            //Debug.Log(i);
 
         }
         x = Instantiate(sceneEndPrefab, new Vector3(0, 0, (currentPosition+1)*rangeBetwenPrefabs), Quaternion.identity);

@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Stamina")]
     [Space]
     
     [Header("Stamina")]
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 aim;
     private bool isLeftTrigger;
     public bool isRightTrigger;
-    private bool isPressB;
+    public bool isPressB;
     private Vector3 playerVelocity;
     [SerializeField]private GameObject circle;
     [SerializeField] private GameObject color;
