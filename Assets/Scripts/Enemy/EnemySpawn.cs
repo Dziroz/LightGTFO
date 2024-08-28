@@ -15,6 +15,7 @@ public class EnemySpawn : MonoBehaviour
 
     [SerializeField] int Snake;
     [SerializeField] int Tank;
+    [SerializeField] int Restart;
     
     float timer;
     void Start()
@@ -39,27 +40,31 @@ public class EnemySpawn : MonoBehaviour
     }
     void Spawn()
     {
-        if (EnemyCount == Snake)
+        if (EnemyCount == Restart)
+        {
+            EnemyCount = 0;
+            return;
+        }
+        if (EnemyCount % Snake == 0)
         {
             var x = Instantiate(enemyPrefab[1], Position(), Quaternion.identity);
             x.GetComponent<EnemyAiTutorial>().enabled = true;
-            EnemyCount++;          
+            EnemyCount++;
+            return;
         }
-        if (EnemyCount == Tank)
+        if (EnemyCount % Tank == 0)
         {
             var x = Instantiate(enemyPrefab[2], Position(), Quaternion.identity);
             x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
+            return;
         }
         else
         {
             var x = Instantiate(enemyPrefab[0], Position(), Quaternion.identity);
             x.GetComponent<EnemyAiTutorial>().enabled = true;
             EnemyCount++;
-        }
-        if(EnemyCount == Tank)
-        {
-            EnemyCount = 0;
+            return; 
         }
     }
     Vector3 Position()

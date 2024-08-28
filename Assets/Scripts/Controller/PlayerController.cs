@@ -8,7 +8,8 @@ using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
 {
-
+    [Space]
+    
     [Header("Stamina")]
     [SerializeField] private float stamina;
     [SerializeField] private float maxStamina;

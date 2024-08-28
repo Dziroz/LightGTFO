@@ -875,12 +875,13 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 4406981965987184283, guid: e626b6bb33a2be145bec684c3a3e9cb2, type: 3}
   - {fileID: 5607411193392404170, guid: aaf18eefe2d7b1f4e9f617446028bd05, type: 3}
-  - {fileID: 4406981965987184283, guid: e626b6bb33a2be145bec684c3a3e9cb2, type: 3}
+  - {fileID: 4406981965987184283, guid: e45fc2ac95dd29744b6599a007f941a0, type: 3}
   EnemyCount: 0
   SpawnColdown: 1
   spawningDistance: 50
   Snake: 5
-  Tank: 10
+  Tank: 9
+  Restart: 10
 --- !u!43 &1747259322
 Mesh:
   m_ObjectHideFlags: 0
