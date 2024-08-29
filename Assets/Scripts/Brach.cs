@@ -12,6 +12,7 @@ public class Brach : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] bool isPlayer;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject bridge;
 
     void Start()
     {
