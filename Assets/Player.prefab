@@ -1790,10 +1790,10 @@ MonoBehaviour:
   startSlow: 10
   lowSpeed: 2
   maxSpeed: 5
-  maxHp: 0
-  hp: 0
+  maxHp: 3
+  hp: 3
   alive: 1
-  immortalTime: 1
+  immortalTime: 3
   isImmortal: 0
   attackColdown: 1
   swordRange: {fileID: 2026772104802939728}
@@ -1810,6 +1810,8 @@ MonoBehaviour:
   fireTimer: 0
   thisFireGameObject: {fileID: 0}
   timeForTakeFire: 2
+  timeToTakeDamage: 2
+  timerToTakeDamage: 0
   colors:
   - {r: 1, g: 0, b: 0.9449339, a: 0}
   - {r: 0.17676413, g: 1, b: 0, a: 0}

@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public GameObject thisFireGameObject;
     [SerializeField] private float timeForTakeFire;
 
+    [SerializeField] private float timeToTakeDamage;
+    [SerializeField] private float timerToTakeDamage;
+
     [Space]
 
     [Header("Color")]
@@ -302,11 +305,18 @@ public class PlayerController : MonoBehaviour
         float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
         if(distance > Lamp.transform.GetChild(0).gameObject.GetComponent<Light>().range)
         {
-            //Debug.Log(gameObject.name + "Вне света");
+            Debug.Log(gameObject.name + "Вне света");
+            timerToTakeDamage += Time.deltaTime;
+            if(timerToTakeDamage >= timeToTakeDamage)
+            {
+                TakeDamage();
+                timerToTakeDamage = 0;
+            }
         }
         else
         {
-           // Debug.Log(gameObject.name + "Горит");
+            Debug.Log(gameObject.name + "Горит");
+            timerToTakeDamage = 0;
         }
     }
     public void Death()
