@@ -16,6 +16,7 @@ public class FireManager : MonoBehaviour
     [SerializeField] public float TimeToLoseFire;
     [SerializeField] public GameObject lampLightPoint;
     [SerializeField] private float timer;
+    [SerializeField] private GameObject lampGameObjectEmmission;
     void Start()
     {
         
@@ -45,6 +46,7 @@ public class FireManager : MonoBehaviour
     private void Find()
     {
         lamp = GameObject.FindGameObjectWithTag("Lamp");
+        lampGameObjectEmmission = GameObject.Find("SVET");
         lampLightPoint = lamp.transform.GetChild(0).gameObject;
     }
     private void Timer()
@@ -82,6 +84,7 @@ public class FireManager : MonoBehaviour
             
             if(firePower <=0)
             {
+                lampGameObjectEmmission.SetActive(false);
                 Debug.Log("Фонарь потушен");
             }
         }
