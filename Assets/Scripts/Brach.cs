@@ -13,6 +13,7 @@ public class Brach : MonoBehaviour
     [SerializeField] bool isPlayer;
     [SerializeField] GameObject player;
     [SerializeField] GameObject bridge;
+    [SerializeField] Animator bridgeAnimator;
 
     void Start()
     {
@@ -41,6 +42,7 @@ public class Brach : MonoBehaviour
         {
             Finish = true;
             animator.SetBool("Ready", true);
+            bridgeAnimator.SetBool("Ready", true);
         }
     }
     private void OnCollisionStay(Collision collision)
