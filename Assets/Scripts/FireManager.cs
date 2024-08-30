@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireManager : MonoBehaviour
 {
+    [SerializeField] GameManager gameManagerScript;
     [SerializeField] private GameObject firePrefab;
     [SerializeField] float timerToSpawnFire;
     [SerializeField] int spawningDistance;
@@ -37,11 +38,14 @@ public class FireManager : MonoBehaviour
     }
     private void Update()
     {
-        SpawnFire();
-        Find();
-        LightPower();
-        Timer();
-        RemovePower();
+        if (gameManagerScript.game)
+        {
+            SpawnFire();
+            Find();
+            LightPower();
+            Timer();
+            RemovePower();
+        }
     }
     private void Find()
     {

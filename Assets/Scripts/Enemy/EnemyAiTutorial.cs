@@ -55,6 +55,7 @@ public class EnemyAiTutorial : MonoBehaviour
     private Rigidbody rb;
     private void Awake()
    {
+        Destroy(gameObject, 60f);
         rb = GetComponent<Rigidbody>();
         //player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();

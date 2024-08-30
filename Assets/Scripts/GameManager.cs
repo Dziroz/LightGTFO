@@ -14,11 +14,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        FindPlayer();
+        //Starting();
     }
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            game = true;
+            TeleportPlayer();
+        }
         FindPlayer();
         FindPlayerLiveStatus();
     }
@@ -27,6 +34,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             PlayerStatus[i] = players[i].GetComponent<PlayerController>().alive;
+            players[i].GetComponent<PlayerController>().enabled = true;
             if(PlayerStatus[i] == false)
             {
                 liveCounter++;
@@ -52,5 +60,17 @@ public class GameManager : MonoBehaviour
             Debug.Log("End");
         }
         Debug.Log("End");
+    }
+    void TeleportPlayer()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].transform.position = new Vector3(3, 1.58f, -9);
+        }
+    }
+    void Starting()
+    {
+        TeleportPlayer();
+        Managers.SetActive(true);
     }
 }

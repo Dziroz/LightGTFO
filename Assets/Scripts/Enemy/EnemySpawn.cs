@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-
+    [SerializeField] GameManager gameManagerScript;
     [SerializeField] private int maxEnemyOnScene;
     [SerializeField]private int EnemyOnScene;
     [SerializeField] GameObject[] enemyPrefab;
@@ -24,14 +24,17 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
-        EnemyOnScene = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        timer += Time.deltaTime;
-        if(timer >= SpawnColdown)
+        if (gameManagerScript.game)
         {
-            if(EnemyOnScene < maxEnemyOnScene)
+            EnemyOnScene = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            timer += Time.deltaTime;
+            if (timer >= SpawnColdown)
             {
-                Spawn();
-                timer = 0;
+                if (EnemyOnScene < maxEnemyOnScene)
+                {
+                    Spawn();
+                    timer = 0;
+                }
             }
         }
     }

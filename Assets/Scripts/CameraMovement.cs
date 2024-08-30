@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField] GameManager gameManagerScript;
     [SerializeField] private GameObject cameraObject;
     [SerializeField] private GameObject[] Players;
     [SerializeField] private float[] Zposition;
@@ -20,11 +21,14 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        Players = GameObject.FindGameObjectsWithTag("Player");
-        SetZ();
-        if(Players.Length != 0)
+        if (gameManagerScript.game)
         {
-            FindZPosition();
+            Players = GameObject.FindGameObjectsWithTag("Player");
+            SetZ();
+            if (Players.Length != 0)
+            {
+                FindZPosition();
+            }
         }
     }
     void FindZPosition()

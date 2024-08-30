@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.iOS;
+//using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public int hp;
     [SerializeField] public bool alive;
     [SerializeField] public float immortalTime;
-    [SerializeField]private bool isImmortal;
+    [SerializeField] private bool isImmortal;
     [SerializeField] private float timeToSpawn;
-    private float respawnTimer;
+    [SerializeField] private float respawnTimer;
 
     [Space]
 
@@ -107,6 +107,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        controller = GetComponent<CharacterController>();
+        playerControls = new PlayerControls();
+        playerInput = GetComponent<PlayerInput>();
+        fireManager = GameObject.Find("FireManager").GetComponent<FireManager>();
+        SetColor();
         playerControls.Enable();
     }
     private void OnDisable()
@@ -115,6 +120,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+
         //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
         if (alive)
