@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public bool[] PlayerStatus;
     public int liveCounter;
     public FireManager fireManagerScript;
+
+    public GameObject Managers;
+
     void Start()
     {
         
