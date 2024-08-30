@@ -79,6 +79,11 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+<<<<<<< Updated upstream
     - _Color: {r: 1, g: 0.45921344, b: 0, a: 1}
     - _EmissionColor: {r: 1.5789167, g: 0.41107452, b: 0.14150664, a: 1}
+=======
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
+>>>>>>> Stashed changes
   m_BuildTextureStacks: []
