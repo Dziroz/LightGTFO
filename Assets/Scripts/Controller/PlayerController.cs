@@ -338,21 +338,27 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage()
     {
-        if (isImmortal)
+        if (GameManager.gameHelth)
         {
+            if(swordRange.activeSelf == false)
+            {
+                if (isImmortal)
+                {
 
-        }
-        else
-        {
-            StartCoroutine(Immortal());
-            hp--;
-            if(lamp.activeSelf == true)
-            {
-                fireManager.AttackLight();
-            }
-            if(hp <= 0)
-            {
-                Death();
+                }
+                else
+                {
+                    StartCoroutine(Immortal());
+                    hp--;
+                    if (lamp.activeSelf == true)
+                    {
+                        fireManager.AttackLight();
+                    }
+                    if (hp <= 0)
+                    {
+                        Death();
+                    }
+                }
             }
         }
     }
@@ -376,6 +382,7 @@ public class PlayerController : MonoBehaviour
     
     void HandleMovement()
     {
+        Debug.Log(movement);
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         if (move != Vector3.zero)
         {

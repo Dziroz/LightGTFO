@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool game;
+    static public bool gameHelth;
     public GameObject[] players;
     public bool[] PlayerStatus;
     public int liveCounter;
@@ -20,8 +21,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.G))
+        gameHelth = game;
+        if (Input.GetKey(KeyCode.G))
         {
             game = true;
             TeleportPlayer();
@@ -65,7 +66,8 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].transform.position = new Vector3(3, 1.58f, -9);
+            players[i].transform.position = new Vector3(fireManagerScript.lamp.transform.position.x, fireManagerScript.lamp.transform.position.y, fireManagerScript.lamp.transform.position.z)
+                ;
         }
     }
     void Starting()
