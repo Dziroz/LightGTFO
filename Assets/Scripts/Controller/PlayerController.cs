@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool alive;
     [SerializeField] public float immortalTime;
     [SerializeField]private bool isImmortal;
+    [SerializeField] private float timeToSpawn;
     private float respawnTimer;
 
     [Space]
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             respawnTimer += Time.deltaTime;
-            if(respawnTimer >= 10)
+            if(respawnTimer >= timeToSpawn)
             {
                 Rebirth();
                 respawnTimer = 0;
@@ -325,7 +326,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Rebirth()
     {
-        transform.position = fireManager.lamp.transform.position;
+        transform.position = new Vector3(fireManager.lamp.transform.position.x, fireManager.lamp.transform.position.y, fireManager.lamp.transform.position.z);
+        hp = maxHp;
         alive = true;
     }
     public void TakeDamage()
@@ -341,6 +343,10 @@ public class PlayerController : MonoBehaviour
             if(lamp.activeSelf == true)
             {
                 fireManager.AttackLight();
+            }
+            if(hp <= 0)
+            {
+                Death();
             }
         }
     }
@@ -406,5 +412,9 @@ public class PlayerController : MonoBehaviour
         {
             colorsNumber = 0;
         }
+    }
+    public int getHP()
+    {
+        return hp;
     }
 }
