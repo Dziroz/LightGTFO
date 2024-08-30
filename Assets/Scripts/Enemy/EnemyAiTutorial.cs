@@ -40,8 +40,8 @@ public class EnemyAiTutorial : MonoBehaviour
     public GameObject col;
 
     [SerializeField] Animator anim;
+    [SerializeField] FireManager FireManagerScript;
 
-    
 
 
     //Attacking
@@ -60,6 +60,7 @@ public class EnemyAiTutorial : MonoBehaviour
         //player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         FindLamp();
+        FireManagerScript = GameObject.Find("FireManager").GetComponent<FireManager>();
 
     }
 
@@ -162,6 +163,10 @@ public class EnemyAiTutorial : MonoBehaviour
 
     private void Attack()
     {
+        if (lamp.parent == null && lamp.gameObject.activeSelf == true)
+        {
+            FireManagerScript.AttackLight();
+        }
         agent.SetDestination(transform.position);
     }
     private void fireEating()

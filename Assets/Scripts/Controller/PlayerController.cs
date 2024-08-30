@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
         {
             lamp.SetActive(false);
             lampInPlayer = false;
-            Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z+1), Quaternion.identity);
         }       
     }
     private void takeFire()

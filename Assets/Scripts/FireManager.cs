@@ -5,6 +5,8 @@ using UnityEngine;
 public class FireManager : MonoBehaviour
 {
     [SerializeField] GameManager gameManagerScript;
+    [SerializeField] private float ImmortalTime;
+    [SerializeField] private float immortalTImer;
     [SerializeField] private GameObject firePrefab;
     [SerializeField] float timerToSpawnFire;
     [SerializeField] int spawningDistance;
@@ -45,6 +47,7 @@ public class FireManager : MonoBehaviour
             LightPower();
             Timer();
             RemovePower();
+            immortalTImer += Time.deltaTime;
         }
     }
     private void Find()
@@ -95,8 +98,9 @@ public class FireManager : MonoBehaviour
     }
     public void AttackLight()
     {
-        if (firePower >= 0)
+        if (firePower >= 0 && immortalTImer >= ImmortalTime) 
         {
+            immortalTImer = 0;
             firePower--;
             ResetTime();
         }

@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 609a6db83b6fcdd4aa6f9b409bda676f, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 9368c031a9a7f694190a2ec99b350f9c, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -1971,6 +1971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerScript: {fileID: 1098737430}
+  ImmortalTime: 0
+  immortalTImer: 0
   firePrefab: {fileID: 2792192099997527015, guid: 4c30595e074acab4f91f5eb328adc51b, type: 3}
   timerToSpawnFire: 10
   spawningDistance: 5
