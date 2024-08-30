@@ -1792,7 +1792,7 @@ MonoBehaviour:
   lowSpeed: 2
   maxSpeed: 5
   maxHp: 3
-  hp: 3
+  hp: 100
   alive: 1
   immortalTime: 3
   isImmortal: 0
