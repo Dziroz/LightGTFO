@@ -1792,11 +1792,12 @@ MonoBehaviour:
   lowSpeed: 2
   maxSpeed: 5
   maxHp: 3
-  hp: 3
+  hp: 100
   alive: 1
   immortalTime: 3
   isImmortal: 0
   timeToSpawn: 5
+  respawnTimer: 0
   attackColdown: 1
   swordRange: {fileID: 2026772104802939728}
   ax: 0
