@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6682757961998562846
 Transform:
   m_ObjectHideFlags: 0
@@ -381,7 +381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4782501086215064571
 Transform:
   m_ObjectHideFlags: 0
@@ -1792,7 +1792,7 @@ MonoBehaviour:
   lowSpeed: 2
   maxSpeed: 5
   maxHp: 3
-  hp: 100
+  hp: 3
   alive: 1
   immortalTime: 3
   isImmortal: 0
@@ -1816,10 +1816,10 @@ MonoBehaviour:
   timeToTakeDamage: 2
   timerToTakeDamage: 0
   colors:
-  - {r: 1, g: 0, b: 0.9449339, a: 0}
+  - {r: 0, g: 0.5588896, b: 1, a: 0}
   - {r: 0.17676413, g: 1, b: 0, a: 0}
   - {r: 0, g: 0.03676009, b: 1, a: 0}
-  - {r: 0, g: 1, b: 0.93155813, a: 0}
+  - {r: 0, g: 1, b: 0.72599363, a: 0}
   playerSpeed: 5
   gravityValue: -9.81
   controllerDeadZone: 0.1
@@ -2655,6 +2655,10 @@ PrefabInstance:
     - target: {fileID: 6648811779993218550, guid: 0bf6f8a90f778224db71f2f34777c672, type: 3}
       propertyPath: m_Name
       value: Lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648811779993218550, guid: 0bf6f8a90f778224db71f2f34777c672, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8404840754900179214, guid: 0bf6f8a90f778224db71f2f34777c672, type: 3}
       propertyPath: m_Name

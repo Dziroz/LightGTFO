@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
         fireManager = GameObject.Find("FireManager").GetComponent<FireManager>();
-        SetColor();
+        //SetColor();
        
 
     }

@@ -140,7 +140,12 @@ public class EnemyAiTutorial : MonoBehaviour
         {
             return lamp;
         }
+        //if(lamp.gameObject.activeSelf == true)
+        //{
+        //    return lamp;
+        //}
         return null;
+
     }
     private void ChaseFire()
     {
