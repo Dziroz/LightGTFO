@@ -220,7 +220,7 @@ MonoBehaviour:
   col: {fileID: 8041231596916210131}
   branchTimerProgres: 0
   isUsing: 0
-  timeToUse: 2
+  timeToUse: 0.5
   Finish: 0
   animator: {fileID: 3505073934091826440}
   isPlayer: 0

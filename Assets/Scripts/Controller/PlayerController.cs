@@ -125,6 +125,7 @@ public class PlayerController : MonoBehaviour
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
         if (alive)
         {
+
             if (PlayerTaking == false)
             {
                 HandleMovement();
@@ -145,6 +146,7 @@ public class PlayerController : MonoBehaviour
                 respawnTimer = 0;
             }
         }
+        Yposition();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -432,5 +434,14 @@ public class PlayerController : MonoBehaviour
     public int getHP()
     {
         return hp;
+    }
+    void Yposition()
+    {
+        if(transform.position.y != 1.58f)
+        {
+            controller.enabled = false;
+            transform.position = new Vector3(transform.position.x, 1.58f, transform.position.z);
+            controller.enabled = true;
+        }
     }
 }
