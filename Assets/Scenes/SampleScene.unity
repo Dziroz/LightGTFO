@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerScript: {fileID: 1098737430}
-  maxEnemyOnScene: 10
+  maxEnemyOnScene: 24
   EnemyOnScene: 0
   enemyPrefab:
   - {fileID: 4406981965987184283, guid: e626b6bb33a2be145bec684c3a3e9cb2, type: 3}
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   ImmortalTime: 3
   immortalTImer: 0
   firePrefab: {fileID: 2792192099997527015, guid: 4c30595e074acab4f91f5eb328adc51b, type: 3}
-  timerToSpawnFire: 1
+  timerToSpawnFire: 8
   spawningDistance: 5
   firePower: 4
   maxFirePower: 0
