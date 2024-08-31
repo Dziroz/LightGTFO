@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class TP : MonoBehaviour
 {
     
@@ -13,9 +13,10 @@ public class TP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.R))
         {
-            transform.position = new Vector3(0, 0, 0);
+            SceneManager.LoadScene(0);
+
         }
     }
 }
