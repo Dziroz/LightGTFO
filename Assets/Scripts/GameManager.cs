@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
             game = true;
             TeleportPlayer();
         }
+        //End();
         FindPlayer();
         FindPlayerLiveStatus();
     }
@@ -42,7 +44,11 @@ public class GameManager : MonoBehaviour
             }
             if(liveCounter == players.Length)
             {
-                End();
+                if (fireManagerScript.firePower <= 0)
+                {
+                    End();
+                    //SceneManager.LoadScene(2);
+                }
             }
 
 
@@ -60,7 +66,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("End");
         }
-        Debug.Log("End");
     }
     void TeleportPlayer()
     {

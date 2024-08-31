@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FireManager : MonoBehaviour
 {
@@ -93,6 +94,8 @@ public class FireManager : MonoBehaviour
             {
                 lampGameObjectEmmission.SetActive(false);
                 Debug.Log("Фонарь потушен");
+                //SceneManager.LoadScene(2);
+                
             }
         }
     }

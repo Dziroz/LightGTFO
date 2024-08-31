@@ -332,7 +332,10 @@ public class PlayerController : MonoBehaviour
     }
     public void Rebirth()
     {
-        transform.position = new Vector3(fireManager.lamp.transform.position.x, fireManager.lamp.transform.position.y, fireManager.lamp.transform.position.z);
+        float x = fireManager.lamp.transform.position.z + 2;
+        controller.enabled = false;
+        transform.position = new Vector3(fireManager.lamp.transform.position.x, fireManager.lamp.transform.position.y, x);
+        controller.enabled = true;
         hp = maxHp;
         alive = true;
     }
@@ -382,7 +385,7 @@ public class PlayerController : MonoBehaviour
     
     void HandleMovement()
     {
-        Debug.Log(movement);
+        //Debug.Log(movement);
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         if (move != Vector3.zero)
         {
