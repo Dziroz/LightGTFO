@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    private AudioSource audio;
+    private new AudioSource audio;
 
     void Start()
     {
