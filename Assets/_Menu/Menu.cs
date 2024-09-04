@@ -21,8 +21,7 @@ public class Menu : MonoBehaviour
 
     public void ClickButtonSettings()
     {
-        audio.Play();
-
+        audio.Play();   
     }
 
     public void ClickButtonExit()
