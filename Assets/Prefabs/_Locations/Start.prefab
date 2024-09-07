@@ -2971,6 +2971,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5599371278231365362, guid: 3d8962bc186e0404aa52775ceadcccff, type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5660957296587430112, guid: 3d8962bc186e0404aa52775ceadcccff, type: 3}
       propertyPath: m_MaxParticleSize
       value: 0.7
