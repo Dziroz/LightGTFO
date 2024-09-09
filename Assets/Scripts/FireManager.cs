@@ -36,6 +36,7 @@ public class FireManager : MonoBehaviour
         if (timerSpawn >= timerToSpawnFire)
         {
             Vector3 startPosition = new Vector3(Camera.main.transform.position.x, 1, Camera.main.transform.position.z);
+            startPosition = new Vector3(lamp.transform.position.x, 1, lamp.transform.position.z);
             float x = Random.Range(-1.0f, 1.0f);
             float z = Random.Range(-1.0f, 1.0f);
             Vector3 v = new Vector3(x, 0.0f, z).normalized;
