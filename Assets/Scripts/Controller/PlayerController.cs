@@ -142,8 +142,15 @@ public class PlayerController : MonoBehaviour
             respawnTimer += Time.deltaTime;
             if(respawnTimer >= timeToSpawn)
             {
-                Rebirth();
-                respawnTimer = 0;
+                if(fireManager.firePower <= 0)
+                {
+
+                }
+                else
+                {
+                    Rebirth();
+                    respawnTimer = 0;
+                }
             }
         }
         Yposition();
@@ -173,7 +180,27 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            isRightTrigger = true;
+            Debug.Log("Zapusk");
+            isRightTrigger = true;     
+            if (lamp.activeSelf)
+            {
+               
+                DropLamp();
+            }
+            else
+            {
+                TakeLamp();
+                
+            }
+        }
+        if (context.performed)
+        {
+            Debug.Log("performed");
+        }
+        if (context.canceled)
+        {
+            /*
+            isRightTrigger = false;
             if (lamp.activeSelf)
             {
                 Debug.Log(1);
@@ -184,11 +211,7 @@ public class PlayerController : MonoBehaviour
                 TakeLamp();
                 Debug.Log(2);
             }
-
-        }
-        if (context.canceled)
-        {
-            isRightTrigger = false;
+            */
         }
     }
     public void OnPressB(InputAction.CallbackContext contex)
@@ -224,6 +247,7 @@ public class PlayerController : MonoBehaviour
                 lamp.SetActive(true);
                 lampInPlayer = true;
                 canTake = false;
+                Debug.Log("Взял");
             }
             //fireManager.DestroyLamp();
 
@@ -231,14 +255,13 @@ public class PlayerController : MonoBehaviour
     }
     private void DropLamp()
     {
-        Debug.Log("Бросил");
         if(lamp.activeSelf == true)
         {
             lampInPlayer = false;
             Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
             lamp.SetActive(false);
+            Debug.Log("Бросил");
             //fireManager.DestroyLamp();
-
         }       
     }
     private void takeFire()
@@ -331,12 +354,13 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log(gameObject.name + "Горит");
+            //Debug.Log(gameObject.name + "Горит");
             timerToTakeDamage = 0;
         }
     }
     public void Death()
     {
+        DropLamp();
         alive = false;
     }
     public void Rebirth()

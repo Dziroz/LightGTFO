@@ -22,15 +22,19 @@ public class Brach : MonoBehaviour
 
     void Update()
     {
-        if (player.GetComponent<PlayerController>().isPressB)
+        if(player != null)
         {
-            Use();
+
+            if (player.GetComponent<PlayerController>().isPressB)
+            {
+                Use();
+            }
+            else if (Finish == false)
+            {
+                branchTimerProgres = 0;
+            }
+            isBranch();
         }
-        else if (Finish == false)
-        {
-            branchTimerProgres = 0;
-        }
-        isBranch();
     }
     void Use()
     {

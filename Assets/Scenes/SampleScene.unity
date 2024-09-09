@@ -389,7 +389,7 @@ MonoBehaviour:
   sceneMissionPrefabs:
   - {fileID: 2190024528589502138, guid: e2f6e4b5d59a0cd4d8b9b32a612db77d, type: 3}
   - {fileID: 2190024528589502138, guid: 5abc54286dcaca247aee3618c5162784, type: 3}
-  sceneStartPrefab: {fileID: 2190024528589502138, guid: bc9f82fed1380304c96aeb8ebe31088d, type: 3}
+  sceneStartPrefab: {fileID: 2190024528589502138, guid: 23fb01caebae96847917bbf0ab0cfade, type: 3}
   sceneEndPrefab: {fileID: 2190024528589502138, guid: 4a06b88dc405432458c336a55aee771b, type: 3}
   count: 5
   MissionPosition: 0200000005000000

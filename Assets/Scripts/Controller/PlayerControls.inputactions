@@ -89,7 +89,7 @@
                     "name": "",
                     "id": "e142e734-d5b7-4816-aec9-eceff89ee0c0",
                     "path": "<Gamepad>/rightTrigger",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press(pressPoint=1E-05,behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "RightTrigger",
