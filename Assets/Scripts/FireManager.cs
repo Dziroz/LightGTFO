@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class FireManager : MonoBehaviour
 {
+    [SerializeField] GameObject[] aliveLamp = new GameObject[10];
+    [SerializeField] GameObject[] aLiveLampInWorld = new GameObject[10];
+    [SerializeField] int lampsALiveCount;
+    [SerializeField] int maxLamplsALiveCount;
     [SerializeField] GameManager gameManagerScript;
     [SerializeField] private float ImmortalTime;
     [SerializeField] private float immortalTImer;
@@ -41,6 +46,7 @@ public class FireManager : MonoBehaviour
     }
     private void Update()
     {
+        DestroyLamp();
         if (gameManagerScript.game)
         {
             SpawnFire();
@@ -49,6 +55,7 @@ public class FireManager : MonoBehaviour
             Timer();
             RemovePower();
             immortalTImer += Time.deltaTime;
+            
         }
     }
     private void Find()
@@ -119,6 +126,50 @@ public class FireManager : MonoBehaviour
             lampLightPoint.GetComponent<Light>().range = firePowerArray[firePower];
         }
         
+    }
+    public void DestroyLamp()
+    {
+        GameObject[] lamps = GameObject.FindGameObjectsWithTag("Lamp");
+
+        for (int i = 0; i < lamps.Length; i++)
+        {
+            if (lamps[i].activeSelf == true)
+            {
+                lampsALiveCount++;               
+            }
+            if (lamps[i].activeSelf == true && lamps[i].transform.parent == false)
+            {
+                aLiveLampInWorld[i] = lamps[i];
+            }
+
+        }
+        for (int i = 0; i < aLiveLampInWorld.Length; i++)
+        {
+
+        }
+        maxLamplsALiveCount = lampsALiveCount;
+        lampsALiveCount = 0;
+       // Debug.Log(length();
+        if (maxLamplsALiveCount>=2)
+        {
+            for (int i = 1; i < aLiveLampInWorld.Length; i++)
+            {
+                Destroy(aLiveLampInWorld[i]);
+            }
+            /*
+            for (int i = 1; i < lamps.Length; i++)
+            {
+                if (lamps[i].transform.parent == null)
+                {
+
+                }
+                else
+                {
+                    Destroy(aLiveLampInWorld[i]);
+                }
+            }
+            */
+        }
     }
 
 

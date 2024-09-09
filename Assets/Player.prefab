@@ -1812,7 +1812,7 @@ MonoBehaviour:
   fireCanTake: 0
   fireTimer: 0
   thisFireGameObject: {fileID: 0}
-  timeForTakeFire: 2
+  timeForTakeFire: 0.5
   timeToTakeDamage: 2
   timerToTakeDamage: 0
   colors:

@@ -218,10 +218,15 @@ public class PlayerController : MonoBehaviour
     {
         if (canTake && lampInPlayer == false)
         {
-            lamp.SetActive(true);
-            Destroy(lampInGame);
-            canTake = false;
-            lampInPlayer = true;
+            if(lamp.activeSelf == false)
+            {
+                Destroy(lampInGame);
+                lamp.SetActive(true);
+                lampInPlayer = true;
+                canTake = false;
+            }
+            //fireManager.DestroyLamp();
+
         }
     }
     private void DropLamp()
@@ -229,9 +234,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Бросил");
         if(lamp.activeSelf == true)
         {
-            lamp.SetActive(false);
             lampInPlayer = false;
-            Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z+1), Quaternion.identity);
+            Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
+            lamp.SetActive(false);
+            //fireManager.DestroyLamp();
+
         }       
     }
     private void takeFire()

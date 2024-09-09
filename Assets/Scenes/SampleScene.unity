@@ -391,7 +391,7 @@ MonoBehaviour:
   - {fileID: 2190024528589502138, guid: 5abc54286dcaca247aee3618c5162784, type: 3}
   sceneStartPrefab: {fileID: 2190024528589502138, guid: bc9f82fed1380304c96aeb8ebe31088d, type: 3}
   sceneEndPrefab: {fileID: 2190024528589502138, guid: 4a06b88dc405432458c336a55aee771b, type: 3}
-  count: 10
+  count: 5
   MissionPosition: 0200000005000000
   rangeBetwenPrefabs: 40
   surfaces: {fileID: 0}
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManagerScript: {fileID: 1098737430}
-  maxEnemyOnScene: 24
+  maxEnemyOnScene: 15
   EnemyOnScene: 0
   enemyPrefab:
   - {fileID: 4406981965987184283, guid: e626b6bb33a2be145bec684c3a3e9cb2, type: 3}
@@ -1073,12 +1073,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7449d3b931cdf4086ecd5c0f5ab367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aliveLamp:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  aLiveLampInWorld:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lampsALiveCount: 0
+  maxLamplsALiveCount: 0
   gameManagerScript: {fileID: 1098737430}
   ImmortalTime: 3
   immortalTImer: 0
   firePrefab: {fileID: 2792192099997527015, guid: 4c30595e074acab4f91f5eb328adc51b, type: 3}
-  timerToSpawnFire: 8
-  spawningDistance: 5
+  timerToSpawnFire: 4
+  spawningDistance: 3
   firePower: 4
   maxFirePower: 0
   firePowerArray: 0000000006000000080000000a0000000c000000
