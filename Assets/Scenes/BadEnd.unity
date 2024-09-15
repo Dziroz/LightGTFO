@@ -238,7 +238,7 @@ PrefabInstance:
     - target: {fileID: 4087922371415837396, guid: da33e6a3741052c4192435f0963d6f66, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5a05e80b7c0d6d04faf0a1b987f6f36a, type: 2}
+      objectReference: {fileID: 2100000, guid: b2c1af6904808d845a1cf76c90d76894, type: 2}
     - target: {fileID: 6859154719979540454, guid: da33e6a3741052c4192435f0963d6f66, type: 3}
       propertyPath: m_Name
       value: w
@@ -2035,6 +2035,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7449d3b931cdf4086ecd5c0f5ab367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aliveLamp:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  aLiveLampInWorld:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lampsALiveCount: 0
+  maxLamplsALiveCount: 0
   gameManagerScript: {fileID: 1098737430}
   ImmortalTime: 0
   immortalTImer: 0
