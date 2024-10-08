@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-
+        
         //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
         if (alive)
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         }
         if (context.performed)
         {
-            Debug.Log("performed");
+            Debug.Log("performed"); StartGame();
         }
         if (context.canceled)
         {
@@ -289,6 +289,13 @@ public class PlayerController : MonoBehaviour
     public void ResetFireTimer()
     {
         fireTimer = 0;
+    }
+    public void StartGame()
+    {
+        if(isLeftTrigger && isRightTrigger)
+        {
+            GameManager.game = true;
+        }
     }
     private void StaminaController()
     {

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public bool game;
+    static public bool game;
     static public bool gameHelth;
     public GameObject[] players;
     public bool[] PlayerStatus;
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         if(fireManagerScript.firePower <= 0)
         {
+            game = false;
             Debug.Log("End");
         }
     }

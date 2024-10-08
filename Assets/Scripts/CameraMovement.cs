@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (gameManagerScript.game)
+        if (GameManager.game)
         {
             Players = GameObject.FindGameObjectsWithTag("Player");
             SetZ();

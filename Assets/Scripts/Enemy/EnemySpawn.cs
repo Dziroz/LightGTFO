@@ -24,7 +24,7 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
-        if (gameManagerScript.game)
+        if (GameManager.game)
         {
             EnemyOnScene = GameObject.FindGameObjectsWithTag("Enemy").Length;
             timer += Time.deltaTime;

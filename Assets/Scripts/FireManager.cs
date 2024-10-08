@@ -48,7 +48,7 @@ public class FireManager : MonoBehaviour
     private void Update()
     {
         DestroyLamp();
-        if (gameManagerScript.game)
+        if (GameManager.game)
         {
             SpawnFire();
             Find();
