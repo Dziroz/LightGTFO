@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float timeToTakeDamage;
     [SerializeField] private float timerToTakeDamage;
+    [SerializeField] private new AudioSource audio;
 
     [Space]
 
@@ -91,10 +92,13 @@ public class PlayerController : MonoBehaviour
     
     private PlayerInput playerInput;
 
+    
+
     private FireManager fireManager;
     [SerializeField]private Collider col;
     [SerializeField]private Animator anim;
     private void Awake()
+
     {
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
@@ -106,6 +110,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
     }
 
     private void OnEnable()

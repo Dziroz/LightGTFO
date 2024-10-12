@@ -809,7 +809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1caeb8a0ea14a4fb827d4f313040e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: 0
   players: []
   PlayerStatus: 
   liveCounter: 0
