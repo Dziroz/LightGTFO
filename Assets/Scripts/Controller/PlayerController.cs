@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 //using UnityEngine.InputSystem.iOS;
 
 public class PlayerController : MonoBehaviour
@@ -63,8 +62,6 @@ public class PlayerController : MonoBehaviour
     [Space]
 
     [Header("Color")]
-
-    static float timeToStart;
 
     public Color[] colors;
     public static int colorsNumber;
@@ -128,7 +125,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        StartGame();
+        
         //canTake = Physics.CheckSphere(transform.position, takeRange, lampMask);
         //lampInGame = Physics.CheckSphere(transform.position, takeRange, lampMask);
         if (alive)
@@ -234,7 +231,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    
     private void Attack()
     {
         attackTimer += Time.deltaTime;
@@ -301,37 +297,7 @@ public class PlayerController : MonoBehaviour
     }
     public void StartGame()
     {
-        var slider = GameObject.Find("Slider");
-        var fill = slider.GetComponent<Slider>();
-        if(GameManager.game == false)
-        {
-            if (isPressB)
-            {
-                slider.transform.localScale = new Vector3(0.9f, 0.8f, 0);
-                timeToStart += Time.deltaTime;
-                if (timeToStart / 2 <= 2)
-                {
-                    fill.value = timeToStart / 2;
-                    Debug.Log(timeToStart);
-                }
-            }
-            else
-            {
-                slider.transform.localScale = new Vector3(0, 0, 0);
-
-                timeToStart = 0;
-                fill.value = 0;
-            }
-        }
-        else
-        {
-            slider.transform.localScale = new Vector3(0, 0, 0);
-
-            timeToStart = 0;
-            fill.value = 0;
-        }
-
-        if(timeToStart >= 2)
+        if(isLeftTrigger && isRightTrigger)
         {
             GameManager.game = true;
         }
