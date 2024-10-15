@@ -346,6 +346,7 @@ public class PlayerController : MonoBehaviour
         if(timeToStart >= 2)
         {
             GameManager.game = true;
+            
         }
     }
     private void StaminaController()
