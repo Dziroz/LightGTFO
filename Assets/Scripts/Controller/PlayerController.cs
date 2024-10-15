@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour
                 canTake = false;
                 Debug.Log("Взял");
             }
-            //fireManager.DestroyLamp();
+            //fireManager.DestroyLamp()
 
         }
     }
