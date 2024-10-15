@@ -267,6 +267,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Взял");
             }
             //fireManager.DestroyLamp()
+            //asd
 
         }
     }
