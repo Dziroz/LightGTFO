@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Stamina")]
     [Space]
+    [Header("Sound")]
+    [SerializeField] AudioClip[] clips;
+    [Space]
     
     [Header("Stamina")]
     [SerializeField] private float stamina;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [Space]
 
     [Header("Attack Settings")]
+    private bool startCorAttack;
     [SerializeField] private float attackColdown;
     private float attackTimer;
     [SerializeField] GameObject swordRange;
@@ -238,7 +242,11 @@ public class PlayerController : MonoBehaviour
         {
             if (attackTimer >= attackColdown)
             {
-                StartCoroutine(attackCoroutines());
+                if(startCorAttack = false)
+                {
+                    StartCoroutine(attackCoroutines());
+                    audio.PlayOneShot(clips[0]);
+                }
             }
         }
     }
@@ -344,10 +352,13 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator attackCoroutines()
     {
+        startCorAttack = true;
         swordRange.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(0.5f);       
         swordRange.SetActive(false);
         attackTimer = 0;
+        startCorAttack = false;
         yield return null;
     }
     private void DeathOutLight()
