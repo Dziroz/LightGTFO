@@ -1789,6 +1789,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: c0649d7ff4f22fa4c9418f4086f5216e, type: 3}
+  - {fileID: 8300000, guid: b053e3d99211fd24c90c6c89b6965b1f, type: 3}
+  - {fileID: 8300000, guid: ea9661bb181299445949ddf77fad9a85, type: 3}
+  - {fileID: 8300000, guid: fe933b9061da3be4aae1c0a3ed83fd63, type: 3}
+  - {fileID: 8300000, guid: 4618e0e687615a74da73b82f68200082, type: 3}
+  - {fileID: 8300000, guid: dcc5113cfc1984f4399abcc1c203a111, type: 3}
   stamina: 15
   maxStamina: 15
   startSlow: 10
@@ -1801,6 +1806,7 @@ MonoBehaviour:
   isImmortal: 0
   timeToSpawn: 5
   respawnTimer: 0
+  startCorAttack: 0
   attackColdown: 1
   swordRange: {fileID: 2026772104802939728}
   ax: 0
@@ -2010,7 +2016,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c180fe37550640344b4b1c2c1655d00f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.209
   m_Pitch: 1
   Loop: 0
   Mute: 0

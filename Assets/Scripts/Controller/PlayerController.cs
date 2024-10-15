@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     [Space]
 
     [Header("Attack Settings")]
-    private bool startCorAttack;
+    [SerializeField]private bool startCorAttack;
     [SerializeField] private float attackColdown;
     private float attackTimer;
     [SerializeField] GameObject swordRange;
@@ -246,7 +246,7 @@ public class PlayerController : MonoBehaviour
         {
             if (attackTimer >= attackColdown)
             {
-                if(startCorAttack = false)
+                if(startCorAttack == false)
                 {
                     StartCoroutine(attackCoroutines());
                     audio.PlayOneShot(clips[0]);
@@ -265,6 +265,7 @@ public class PlayerController : MonoBehaviour
                 lampInPlayer = true;
                 canTake = false;
                 Debug.Log("Взял");
+                audio.PlayOneShot(clips[1]);
             }
             //fireManager.DestroyLamp()
             //asd
@@ -279,6 +280,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
             lamp.SetActive(false);
             Debug.Log("Бросил");
+            audio.PlayOneShot(clips[2]);
             //fireManager.DestroyLamp();
         }       
     }
@@ -297,6 +299,7 @@ public class PlayerController : MonoBehaviour
         }
         if (fireTimer >= timeForTakeFire)
         {
+            audio.PlayOneShot(clips[3]);
             fireManager.AddPower();
             Destroy(thisFireGameObject);
             fireCanTake = false;
@@ -418,6 +421,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Death()
     {
+        audio.PlayOneShot(clips[4]);
         DropLamp();
         alive = false;
     }
@@ -429,6 +433,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         hp = maxHp;
         alive = true;
+        audio.PlayOneShot(clips[5]);
     }
     public void TakeDamage()
     {

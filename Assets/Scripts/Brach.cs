@@ -14,10 +14,11 @@ public class Brach : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject bridge;
     [SerializeField] Animator bridgeAnimator;
+    [SerializeField] AudioSource audio;
 
     void Start()
     {
-
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -38,15 +39,21 @@ public class Brach : MonoBehaviour
     }
     void Use()
     {
-        branchTimerProgres += Time.deltaTime;
+        if(Finish == false)
+        {
+            branchTimerProgres += Time.deltaTime;
+        }
     }
     void isBranch()
     {
         if (branchTimerProgres >= timeToUse)
-        {
+        {          
             Finish = true;
             animator.SetBool("Ready", true);
             bridgeAnimator.SetBool("Ready", true);
+            audio.Play();
+            branchTimerProgres = 0;
+
         }
     }
     private void OnCollisionStay(Collision collision)
