@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        var slider = GameObject.Find("Slider");
+        slider.transform.localScale = new Vector3(0, 0, 0);
         FindPlayer();
         //Starting();
     }
@@ -76,9 +78,9 @@ public class GameManager : MonoBehaviour
                 ;
         }
     }
-    void Starting()
+    public void Starting()
     {
         TeleportPlayer();
-        Managers.SetActive(true);
+        game = true;
     }
 }
