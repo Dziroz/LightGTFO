@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Stamina")]
     [Space]
+    [Header("Sound")]
+    [SerializeField] AudioClip[] clips;
+    [Space]
     
     [Header("Stamina")]
     [SerializeField] private float stamina;
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [Space]
 
     [Header("Attack Settings")]
+    [SerializeField]private bool startCorAttack;
     [SerializeField] private float attackColdown;
     private float attackTimer;
     [SerializeField] GameObject swordRange;
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float timeToTakeDamage;
     [SerializeField] private float timerToTakeDamage;
+    [SerializeField] private new AudioSource audio;
 
     [Space]
 
@@ -91,10 +96,13 @@ public class PlayerController : MonoBehaviour
     
     private PlayerInput playerInput;
 
+    
+
     private FireManager fireManager;
     [SerializeField]private Collider col;
     [SerializeField]private Animator anim;
     private void Awake()
+
     {
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
@@ -106,6 +114,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -237,7 +246,11 @@ public class PlayerController : MonoBehaviour
         {
             if (attackTimer >= attackColdown)
             {
-                StartCoroutine(attackCoroutines());
+                if(startCorAttack == false)
+                {
+                    StartCoroutine(attackCoroutines());
+                    audio.PlayOneShot(clips[0]);
+                }
             }
         }
     }
@@ -252,8 +265,10 @@ public class PlayerController : MonoBehaviour
                 lampInPlayer = true;
                 canTake = false;
                 Debug.Log("Взял");
+                audio.PlayOneShot(clips[1]);
             }
-            //fireManager.DestroyLamp();
+            //fireManager.DestroyLamp()
+            //asd
 
         }
     }
@@ -265,6 +280,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
             lamp.SetActive(false);
             Debug.Log("Бросил");
+            audio.PlayOneShot(clips[2]);
             //fireManager.DestroyLamp();
         }       
     }
@@ -283,6 +299,7 @@ public class PlayerController : MonoBehaviour
         }
         if (fireTimer >= timeForTakeFire)
         {
+            audio.PlayOneShot(clips[3]);
             fireManager.AddPower();
             Destroy(thisFireGameObject);
             fireCanTake = false;
@@ -296,34 +313,34 @@ public class PlayerController : MonoBehaviour
     }
     public void StartGame()
     {
-        //var slider = GameObject.Find("Slider");
-        //var fill = slider.GetComponent<Slider>();
+        var slider = GameObject.Find("Slider");
+        var fill = slider.GetComponent<Slider>();
         if(GameManager.game == false)
         {
             if (isPressB)
             {
-                //slider.transform.localScale = new Vector3(0.9f, 0.8f, 0);
+                slider.transform.localScale = new Vector3(0.9f, 0.8f, 0);
                 timeToStart += Time.deltaTime;
                 if (timeToStart / 2 <= 2)
                 {
-                    //fill.value = timeToStart / 2;
+                    fill.value = timeToStart / 2;
                     Debug.Log(timeToStart);
                 }
             }
             else
             {
-                //slider.transform.localScale = new Vector3(0, 0, 0);
+                slider.transform.localScale = new Vector3(0, 0, 0);
 
-                //timeToStart = 0;
-                //fill.value = 0;
+                timeToStart = 0;
+                fill.value = 0;
             }
         }
         else
         {
-            //slider.transform.localScale = new Vector3(0, 0, 0);
+            slider.transform.localScale = new Vector3(0, 0, 0);
 
             timeToStart = 0;
-            //fill.value = 0;
+            fill.value = 0;
         }
 
         if(timeToStart >= 2)
@@ -373,10 +390,13 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator attackCoroutines()
     {
+        startCorAttack = true;
         swordRange.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(0.5f);       
         swordRange.SetActive(false);
         attackTimer = 0;
+        startCorAttack = false;
         yield return null;
     }
     private void DeathOutLight()
@@ -401,6 +421,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Death()
     {
+        audio.PlayOneShot(clips[4]);
         DropLamp();
         alive = false;
     }
@@ -412,6 +433,7 @@ public class PlayerController : MonoBehaviour
         controller.enabled = true;
         hp = maxHp;
         alive = true;
+        audio.PlayOneShot(clips[5]);
     }
     public void TakeDamage()
     {

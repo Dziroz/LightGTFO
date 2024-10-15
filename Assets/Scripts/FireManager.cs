@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class FireManager : MonoBehaviour
 {
+    [SerializeField] AudioSource audio;
+    [SerializeField] AudioClip[] clips;
     [SerializeField] GameObject[] aliveLamp = new GameObject[10];
     [SerializeField] GameObject[] aLiveLampInWorld = new GameObject[10];
     [SerializeField] int lampsALiveCount;
@@ -28,7 +30,7 @@ public class FireManager : MonoBehaviour
     [SerializeField] private GameObject lampGameObjectEmmission;
     void Start()
     {
-        
+        audio = GetComponent<AudioSource>();
     }
     void SpawnFire()
     {
@@ -102,6 +104,7 @@ public class FireManager : MonoBehaviour
             {
                 lampGameObjectEmmission.SetActive(false);
                 Debug.Log("Фонарь потушен");
+                audio.PlayOneShot(clips[0]);
                 //SceneManager.LoadScene(2);
                 
             }
