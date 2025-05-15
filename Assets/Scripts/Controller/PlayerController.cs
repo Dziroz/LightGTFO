@@ -313,34 +313,53 @@ public class PlayerController : MonoBehaviour
     }
     public void StartGame()
     {
-        //var slider = GameObject.Find("Slider");
-        //var fill = slider.GetComponent<Slider>();
+        var slider = GameObject.Find("Slider");
+        var fill = slider.GetComponent<Slider>();
         if(GameManager.game == false)
         {
             if (isPressB)
             {
-                //slider.transform.localScale = new Vector3(0.9f, 0.8f, 0);
+                slider.transform.localScale = new Vector3(0.9f, 0.8f, 0);
                 timeToStart += Time.deltaTime;
                 if (timeToStart / 2 <= 2)
                 {
-                    //fill.value = timeToStart / 2;
+                    fill.value = timeToStart / 2;
+
+               slider.transform.localScale = new Vector3(0.9f, 0.8f, 0);
+                timeToStart += Time.deltaTime;
+                if (timeToStart / 2 <= 2)
+                {
+                  fill.value = timeToStart / 2;
                     Debug.Log(timeToStart);
                 }
             }
             else
             {
-                //slider.transform.localScale = new Vector3(0, 0, 0);
+
+                slider.transform.localScale = new Vector3(0, 0, 0);
 
                 timeToStart = 0;
-                //fill.value = 0;
+                fill.value = 0;
+
+                slider.transform.localScale = new Vector3(0, 0, 0);
+
+                timeToStart = 0;
+                fill.value = 0;
+
             }
         }
         else
         {
-            //slider.transform.localScale = new Vector3(0, 0, 0);
+
+            slider.transform.localScale = new Vector3(0, 0, 0);
 
             timeToStart = 0;
-            //fill.value = 0;
+            fill.value = 0;
+
+            slider.transform.localScale = new Vector3(0, 0, 0);
+
+            timeToStart = 0;
+            fill.value = 0;
         }
 
         if(timeToStart >= 2)
