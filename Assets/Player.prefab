@@ -1786,8 +1786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f607ea217cac18a45b88b75d43ce79aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: c0649d7ff4f22fa4c9418f4086f5216e, type: 3}
   stamina: 15
   maxStamina: 15
   startSlow: 10
