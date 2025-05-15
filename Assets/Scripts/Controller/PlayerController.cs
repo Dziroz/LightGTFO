@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Stamina")]
     [Space]
+    [Header("Sound")]
+    [SerializeField] AudioClip[] clips;
+    [Space]
     
     [Header("Stamina")]
     [SerializeField] private float stamina;
@@ -32,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [Space]
 
     [Header("Attack Settings")]
+    private bool startCorAttack;
     [SerializeField] private float attackColdown;
     private float attackTimer;
     [SerializeField] GameObject swordRange;
@@ -72,7 +76,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float controllerDeadZone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
-    [SerializeField] private bool PlayerTaking; // Игрок подбирает предмет
+    [SerializeField] private bool PlayerTaking; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     private CharacterController controller;
 
@@ -237,7 +241,11 @@ public class PlayerController : MonoBehaviour
         {
             if (attackTimer >= attackColdown)
             {
-                StartCoroutine(attackCoroutines());
+                if(startCorAttack = false)
+                {
+                    StartCoroutine(attackCoroutines());
+                    GetComponent<AudioSource>().PlayOneShot(clips[0]);
+                }
             }
         }
     }
@@ -251,7 +259,7 @@ public class PlayerController : MonoBehaviour
                 lamp.SetActive(true);
                 lampInPlayer = true;
                 canTake = false;
-                Debug.Log("Взял");
+                Debug.Log("пїЅпїЅпїЅпїЅ");
             }
             //fireManager.DestroyLamp();
 
@@ -264,7 +272,7 @@ public class PlayerController : MonoBehaviour
             lampInPlayer = false;
             Instantiate(lampPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z + 1), Quaternion.identity);
             lamp.SetActive(false);
-            Debug.Log("Бросил");
+            Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅ");
             //fireManager.DestroyLamp();
         }       
     }
@@ -373,10 +381,13 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator attackCoroutines()
     {
+        startCorAttack = true;
         swordRange.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        
+        yield return new WaitForSeconds(0.5f);       
         swordRange.SetActive(false);
         attackTimer = 0;
+        startCorAttack = false;
         yield return null;
     }
     private void DeathOutLight()
@@ -385,7 +396,7 @@ public class PlayerController : MonoBehaviour
         float distance = Vector3.Distance(Lamp.transform.position, this.transform.position);
         if(distance > Lamp.transform.GetChild(0).gameObject.GetComponent<Light>().range)
         {
-            Debug.Log(gameObject.name + "Вне света");
+            Debug.Log(gameObject.name + "пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
             timerToTakeDamage += Time.deltaTime;
             if(timerToTakeDamage >= timeToTakeDamage)
             {
@@ -395,7 +406,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //Debug.Log(gameObject.name + "Горит");
+            //Debug.Log(gameObject.name + "пїЅпїЅпїЅпїЅпїЅ");
             timerToTakeDamage = 0;
         }
     }
