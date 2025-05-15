@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioSource audio;
     static public bool game;
     static public bool gameHelth;
     public GameObject[] players;
@@ -14,7 +13,6 @@ public class GameManager : MonoBehaviour
     public FireManager fireManagerScript;
 
     public GameObject Managers;
-    public float songTimer;
 
     void Start()
     {
@@ -26,11 +24,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (game)
-        {
-            songTimer -= Time.deltaTime;
-            audio.volume = songTimer/10;
-        }
         gameHelth = game;
         if (Input.GetKey(KeyCode.G))
         {
@@ -47,11 +40,11 @@ public class GameManager : MonoBehaviour
         {
             PlayerStatus[i] = players[i].GetComponent<PlayerController>().alive;
             players[i].GetComponent<PlayerController>().enabled = true;
-            if(PlayerStatus[i] == false)
+            if (PlayerStatus[i] == false)
             {
                 liveCounter++;
             }
-            if(liveCounter == players.Length)
+            if (liveCounter == players.Length)
             {
                 if (fireManagerScript.firePower <= 0)
                 {
@@ -71,7 +64,7 @@ public class GameManager : MonoBehaviour
     }
     void End()
     {
-        if(fireManagerScript.firePower <= 0)
+        if (fireManagerScript.firePower <= 0)
         {
             game = false;
             Debug.Log("End");
